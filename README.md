@@ -1,3 +1,3 @@
 <h1 align="center">
-    Numbersarence.com
+    Numbersarenice.com
 </h1>
