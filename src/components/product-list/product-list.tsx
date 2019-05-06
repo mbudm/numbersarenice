@@ -18,9 +18,10 @@ interface IProps {
       slug: string
     }
     frontmatter: {
-      date: string
+      price: string
       title: string
       description: string
+      tags: string
       cover?: {
         childImageSharp?: {
           fluid: FluidObject | null
@@ -32,7 +33,7 @@ interface IProps {
 }
 
 /* 
-  Desktop version automatically extends blog list 
+  Desktop version automatically extends products list 
   as soon as user scrolls near the bottom
 */
 @observer
@@ -67,14 +68,15 @@ class ProductListDesktop extends React.Component<IProps, {}> {
   render() {
     return (
       <div style={{ minHeight: "50vh" }}>
-        {this.props.products.slice(0, productStore.postsToShow).map(node => (
+        {this.props.products.slice(0, productStore.productsToShow).map(node => (
           <div key={node.id}>
             <ProductListElement
               data={{
                 slug: node.fields.slug,
-                date: node.frontmatter.date,
+                price: node.frontmatter.price,
                 title: node.frontmatter.title,
                 description: node.frontmatter.description,
+                tags: node.frontmatter.tags,
                 coverFluid:
                   node.frontmatter.cover &&
                   node.frontmatter.cover.childImageSharp
@@ -90,7 +92,7 @@ class ProductListDesktop extends React.Component<IProps, {}> {
 }
 
 /* 
-  Mobile version extends blog list as soon as user clicks 
+  Mobile version extends product list as soon as user clicks 
   on a "LoadMore" button at the end of the list
 */
 @observer
@@ -102,14 +104,15 @@ class ProductListMobile extends React.Component<IProps, {}> {
   render() {
     return (
       <div style={{ minHeight: "50vh" }}>
-        {this.props.products.slice(0, productStore.postsToShow).map(node => (
+        {this.props.products.slice(0, productStore.productsToShow).map(node => (
           <div key={node.id}>
             <ProductListElement
               data={{
                 slug: node.fields.slug,
-                date: node.frontmatter.date,
+                price: node.frontmatter.price,
                 title: node.frontmatter.title,
                 description: node.frontmatter.description,
+                tags: node.frontmatter.tags,
                 coverFluid:
                   node.frontmatter.cover &&
                   node.frontmatter.cover.childImageSharp
@@ -119,7 +122,7 @@ class ProductListMobile extends React.Component<IProps, {}> {
             />
           </div>
         ))}
-        {this.props.totalCount > productStore.postsToShow && (
+        {this.props.totalCount > productStore.productsToShow && (
           <ShowMoreButton onClickHandler={this.handleUpdate} />
         )}
       </div>

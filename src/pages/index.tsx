@@ -13,8 +13,9 @@ interface IProps {
           id: string
           frontmatter: {
             title: string
-            date: string
+            price: string
             description: string
+            tags: string
             cover: {
               childImageSharp: {
                 fluid: FluidObject
@@ -60,8 +61,9 @@ export const query = graphql`
           id
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            price
             description
+            tags
             cover {
               childImageSharp {
                 ... on ImageSharp {

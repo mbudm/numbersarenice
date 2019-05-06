@@ -2,11 +2,11 @@ import { observable, action } from "mobx"
 import CONFIG from "../config"
 
 export class ProductStore {
-  @observable postsToShow: number = CONFIG.countOfInitiallyShownPosts
+  @observable productsToShow: number = CONFIG.countOfInitiallyShownProducts
 
   @action
   add() {
-    this.postsToShow += CONFIG.countOfPostsDynamicallyAdded
+    this.productsToShow += CONFIG.countOfProductsDynamicallyAdded
   }
 }
 

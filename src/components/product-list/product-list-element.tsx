@@ -10,17 +10,17 @@ import Avatar from "@material-ui/core/Avatar"
 import CardHeader from "@material-ui/core/CardHeader"
 import THEME from "../../theme";
 
-interface IBlogListElement {
+interface IProductListElement {
   data: {
     slug: string
-    date: string
+    price: string
     title: string
     description: string
     coverFluid: FluidObject | null
   }
 }
 
-export default ({ data }: IBlogListElement) => (
+export default ({ data }: IProductListElement) => (
   <div style={{ marginTop: 25, marginBottom: 25 }}>
     <Card>
       <CardActionArea>
@@ -44,7 +44,7 @@ export default ({ data }: IBlogListElement) => (
               </Avatar>
             }
             title={data.title}
-            subheader={data.date}
+            subheader={data.price}
           />
           {data.coverFluid ? <Image fluid={data.coverFluid} /> : null}
           <CardContent>
