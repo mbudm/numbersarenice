@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layouts/index-layout"
-import ProductList from "../components/product-list/product-list"
+import BlogList from "../components/blog-list/blog-list"
 import { FluidObject } from "gatsby-image"
 
 interface IProps {
@@ -31,28 +31,32 @@ interface IProps {
   }
 }
 
-class Products extends React.Component<IProps> {
+class Index extends React.Component<IProps> {
   render() {
-    const products = this.props.data.allMarkdownRemark.edges.map(
+    const posts = this.props.data.allMarkdownRemark.edges.map(
       (e: any) => e.node
     )
     const totalCount = this.props.data.allMarkdownRemark.totalCount
 
     return (
       <Layout>
-        <ProductList products={products} totalCount={totalCount} />
+        <BlogList posts={posts} totalCount={totalCount} />
       </Layout>
     )
   }
 }
 
-export default Products
+export default Index
+// Q how do filter this to get just product markdown pages?
+// could be a param in the md meta but seem like being able to search markdown within 
+// a directory would be more efficient
+// with that worked out then can do a product layout component that adds tiles
 
 export const query = graphql`
   query {
     allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC },
-        filter: {fileAbsolutePath: {regex: "/(products)/.*\\.md$/"}}
+        filter: {fileAbsolutePath: {regex: "/(posts)/.*\\.md$/"}}
       ) {
       totalCount
       edges {
