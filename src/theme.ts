@@ -23,7 +23,7 @@ const THEME = {
       backgroundColor: "#eeeeee",
     },
     header: {
-      backgroundImage: "linear-gradient(20deg, #039be5, #26a69a)",
+      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #306072, #67a0b5)",
     },
     aboutButton: {
       color: "white",
@@ -33,8 +33,8 @@ const THEME = {
     },
   },
   author: {
-    avatar: {
-      width: 70,
+    logo: {
+      width: 380,
       height: 70,
     },
     title: {
@@ -55,11 +55,11 @@ const THEME = {
     color: "#059ce2",
     backgroundColor: "white",
   },
-  networkButton: {
+  buyButton: {
     color: "white",
-    backgroundColor: "#333",
-    width: 45,
-    height: 45,
+    borderColor: "white",
+    backgroundColor: "#059ce2",
+    width: 140,
   },
   aboutPage: {
     layout: {

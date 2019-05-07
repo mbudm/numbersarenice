@@ -14,6 +14,7 @@ interface IProps {
           frontmatter: {
             title: string
             price: string
+            url: string
             description: string
             tags: string
             cover: {
@@ -62,6 +63,7 @@ export const query = graphql`
           frontmatter {
             title
             price
+            url
             description
             tags
             cover {

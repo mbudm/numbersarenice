@@ -1,7 +1,5 @@
 import * as React from "react"
 import { withPrefix, Link } from "gatsby"
-
-import Avatar from "@material-ui/core/Avatar"
 import Grid from "@material-ui/core/Grid"
 import THEME from "../../theme"
 
@@ -22,26 +20,16 @@ export default ({ author }: IProps) => {
       direction={"column"}
     >
       <Link to="/">
-        <Avatar
+        <img
           style={{
             alignItems: "baseline",
-            width: THEME.author.avatar.width,
-            height: THEME.author.avatar.height,
+            width: THEME.author.logo.width,
+            height: THEME.author.logo.height,
           }}
           src={withPrefix(author.image)}
           alt={author.name}
         />
       </Link>
-      <h1
-        style={{
-          color: THEME.author.title.color,
-          fontSize: THEME.author.title.fontSize,
-          marginTop: 20,
-          marginBottom: 20,
-        }}
-      >
-        {author.name}
-      </h1>
       <p
         style={{
           color: THEME.author.desc.color,

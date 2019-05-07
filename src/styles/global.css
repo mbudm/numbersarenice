@@ -17,3 +17,6 @@ html {
 :not(pre)>code[class*="language-"] {
     font-size: 18px;
 }
+a {
+    background-image: none;
+}

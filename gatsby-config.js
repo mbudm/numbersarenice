@@ -1,19 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Haezl`,
+    title: `Numbers are Nice`,
     author: {
-      name: "gatsby starter haezl",
-      image: "/img/me.png",
+      name: "Numbers are nice",
+      image: "/img/logo.svg",
       biography:
-        "A lightweight, mobile first blog starter with infinite scroll \
-        and Material-UI design elements for Gatsby.",
+        "Clear, easy to follow math posters.",
     },
     // for a list of supported networks take a look at https://jaketrent.github.io/react-social-icons/
-    networks: [
-      "https://twitter.com/iamhaezl",
-      "https://github.com/haezl/gatsby-starter-haezl",
-      "mailto:mail@haezl.at",
-    ],
+    networks: [],
     about:
       '<p>A lightweight, mobile first blog starter with infinite scroll \
     and Material-UI design elements for \

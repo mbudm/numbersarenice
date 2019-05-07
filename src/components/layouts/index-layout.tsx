@@ -4,7 +4,6 @@ import Responsive from "react-responsive"
 
 import Author from "../me/author"
 import AboutButton from "../me/about-button"
-import SocialNetworks from "../me/social-networks"
 import CallToActionButton from "../me/calltoaction-button"
 import THEME from "../../theme"
 
@@ -19,7 +18,6 @@ interface IDataProps {
         image: string
         biography: string
       }
-      networks: string[]
     }
   }
 }
@@ -43,7 +41,7 @@ interface IHeaderArea {
 const HeaderArea = ({ data, styles }: IHeaderArea) => (
   <div
     style={{
-      backgroundImage: THEME.index.header.backgroundImage,
+      background: THEME.index.header.background,
     }}
   >
     <AboutButton />
@@ -54,7 +52,6 @@ const HeaderArea = ({ data, styles }: IHeaderArea) => (
       }}
     >
       <Author author={data.site.siteMetadata.author} />
-      <SocialNetworks networks={data.site.siteMetadata.networks} />
       <CallToActionButton />
     </div>
   </div>
@@ -66,7 +63,6 @@ const ContentArea = ({ children }: { children: React.ReactNode }) => (
     style={{
       flexGrow: 1,
       margin: "0 auto",
-      maxWidth: THEME.index.layout.cardSectionMaxWidth,
       padding: 10,
       paddingTop: 10,
     }}
@@ -97,7 +93,6 @@ export default ({ children }) => (
               image
               biography
             }
-            networks
           }
         }
       }
@@ -108,7 +103,7 @@ export default ({ children }) => (
         <Default>
           <IndexLayout
             data={data}
-            styles={{ paddingTop: 75, paddingBottom: 75 }}
+            styles={{ paddingTop: 30, paddingBottom: 30 }}
           >
             {children}
           </IndexLayout>
@@ -116,7 +111,7 @@ export default ({ children }) => (
         <Mobile>
           <IndexLayout
             data={data}
-            styles={{ paddingTop: 50, paddingBottom: 50 }}
+            styles={{ paddingTop: 20, paddingBottom: 20 }}
           >
             {children}
           </IndexLayout>

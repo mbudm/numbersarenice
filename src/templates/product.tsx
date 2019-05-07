@@ -11,6 +11,7 @@ interface IProduct {
         description: string
         price: string
         tags: string
+        url: string
         cover: {
           childImageSharp: {
             fluid: FluidObject
@@ -22,7 +23,7 @@ interface IProduct {
 }
 
 export default ({ data }: IProduct) => {
-  const node = data.markdownRemark
+  const node = data.markdownRemark;
   const cover =
     node.frontmatter.cover && node.frontmatter.cover.childImageSharp
       ? node.frontmatter.cover.childImageSharp.fluid
@@ -32,6 +33,7 @@ export default ({ data }: IProduct) => {
         title,
         description,
         price,
+        url,
         tags
       } = node.frontmatter;
 
@@ -42,6 +44,7 @@ export default ({ data }: IProduct) => {
       description={description}
       price={price}
       tags={tags}
+      url={url}
     />
   )
 }
@@ -53,6 +56,7 @@ export const query = graphql`
         title
         description
         price
+        url
         tags
         cover {
           childImageSharp {

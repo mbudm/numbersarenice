@@ -2,6 +2,7 @@ import * as React from "react"
 import { observer } from "mobx-react"
 import productStore from "../../stores/ProductStore"
 import Responsive from "react-responsive"
+import Grid from '@material-ui/core/Grid';
 import ShowMoreButton from "./show-more-button"
 
 import ProductListElement from "./product-list-element"
@@ -19,6 +20,7 @@ interface IProps {
     }
     frontmatter: {
       price: string
+      url: string
       title: string
       description: string
       tags: string
@@ -67,13 +69,14 @@ class ProductListDesktop extends React.Component<IProps, {}> {
 
   render() {
     return (
-      <div style={{ minHeight: "50vh" }}>
-        {this.props.products.slice(0, productStore.productsToShow).map(node => (
-          <div key={node.id}>
+      <Grid container={true} spacing={24}>
+        {this.props.products.slice(0, productStore.productsToShow).map(node => (  
+          <Grid item={true} xs={12} sm={6} md={4} lg={3} xl={2} key={node.id}>
             <ProductListElement
               data={{
                 slug: node.fields.slug,
                 price: node.frontmatter.price,
+                url: node.frontmatter.url,
                 title: node.frontmatter.title,
                 description: node.frontmatter.description,
                 tags: node.frontmatter.tags,
@@ -84,9 +87,9 @@ class ProductListDesktop extends React.Component<IProps, {}> {
                     : null,
               }}
             />
-          </div>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     )
   }
 }
@@ -110,6 +113,7 @@ class ProductListMobile extends React.Component<IProps, {}> {
               data={{
                 slug: node.fields.slug,
                 price: node.frontmatter.price,
+                url: node.frontmatter.url,
                 title: node.frontmatter.title,
                 description: node.frontmatter.description,
                 tags: node.frontmatter.tags,

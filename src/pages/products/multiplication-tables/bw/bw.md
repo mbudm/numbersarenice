@@ -1,5 +1,5 @@
 ---
-title: "Multiplication Tables - Dark"
+title: "Multiplication Tables - Black & White"
 tags: "multiplication, times tables, math, mathematics, learning, kids, dark theme"
 price: "$12"
 description: "A clear, easy to read multiplication tables poster that looks nice! This poster comes in a dark theme. Get it delivered to you from RedBubble, our printing partner."
