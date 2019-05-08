@@ -2,7 +2,7 @@ const THEME = {
   blogPost: {
     layout: {
       cardMaxWidth: 1000,
-      backgroundColor: "#eeeeee",
+      backgroundColor: "#eeeedd",
     },
     showMoreButton: {
       color: "#059ce2",
@@ -23,7 +23,7 @@ const THEME = {
       backgroundColor: "#eeeeee",
     },
     header: {
-      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #306072, #67a0b5)",
+      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #726030, #b5a067)",
     },
     aboutButton: {
       color: "white",
@@ -34,8 +34,7 @@ const THEME = {
   },
   author: {
     logo: {
-      width: 380,
-      height: 70,
+      width: "60%",
     },
     title: {
       color: "white",
@@ -58,13 +57,13 @@ const THEME = {
   buyButton: {
     color: "white",
     borderColor: "white",
-    backgroundColor: "#059ce2",
+    backgroundColor: "#05d22c",
     width: 140,
   },
   aboutPage: {
     layout: {
       cardMaxWidth: 800,
-      backgroundColor: "#eeeeee",
+      backgroundColor: "#eeeedd",
     },
   },
 }

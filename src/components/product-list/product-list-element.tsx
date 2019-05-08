@@ -25,7 +25,6 @@ export default ({ data }: IProductListElement) => (
   <div style={{ marginTop: 25, marginBottom: 25 }}>
     <Card>
       <CardActionArea>
-        
         <Link
           to={data.slug}
           style={{
@@ -33,14 +32,11 @@ export default ({ data }: IProductListElement) => (
             color: "inherit",
           }}
         >
-          <CardHeader
-            title={data.title}
-          />
           {data.coverFluid ? <Image fluid={data.coverFluid} /> : null}
         </Link>
         <CardContent>
           <BuyButton price={data.price} url={data.url}/>
-          <Typography component="p">{data.description}</Typography>
+          <Typography component="p">{data.title}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

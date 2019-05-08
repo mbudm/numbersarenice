@@ -19,12 +19,12 @@ export default ({ author }: IProps) => {
       alignItems="center"
       direction={"column"}
     >
-      <Link to="/">
+      <Link to="/" style={{width: THEME.author.logo.width}}>
         <img
           style={{
             alignItems: "baseline",
-            width: THEME.author.logo.width,
-            height: THEME.author.logo.height,
+            width: "100%",
+            height: "auto",
           }}
           src={withPrefix(author.image)}
           alt={author.name}
