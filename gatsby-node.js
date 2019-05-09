@@ -23,7 +23,7 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(`
     {
       allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { fields: [frontmatter___title,], order: DESC }
         limit: ${BLOG_POST_LIMIT}
       ) {
         edges {

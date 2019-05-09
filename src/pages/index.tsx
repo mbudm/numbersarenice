@@ -53,7 +53,7 @@ export default Products
 export const query = graphql`
   query {
     allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC },
+        sort: { fields: [frontmatter___title], order: DESC },
         filter: {fileAbsolutePath: {regex: "/(products)/.*\\.md$/"}}
       ) {
       totalCount

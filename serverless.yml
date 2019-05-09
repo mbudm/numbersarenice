@@ -10,7 +10,7 @@ plugins:
 custom:
   s3Sync:
     - bucketName: ${self:provider.environment.BUCKET_NAME}
-      localDir: build
+      localDir: public
   remover:
     buckets:
       - ${self:provider.environment.BUCKET_NAME}
