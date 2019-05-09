@@ -16,7 +16,9 @@ module.exports = {
     with math posters that are clear and easy to follow.</p>
     <p>Our products are well designed using a neat alignment and judicious typography
     with key information in big type
-    so that the important things are retained more easily</p> \
+    so that the important things are retained more easily</p>
+    <p>Any questions or feedback? Contact us through our 
+    <a href="https://www.redbubble.com/people/numbersarenice" >RedBubble profile page</a></p>
     `,
   },
   plugins: [

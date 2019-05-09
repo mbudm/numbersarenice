@@ -27,7 +27,7 @@ provider:
     CUSTOM_DOMAIN: numberarenice.com
     BUCKET_NAME: numberarenice
     HOSTED_ZONE_NAME: numberarenice.com.
-    ACM_CERT_ARN: arn:aws:acm:us-east-1:366399188066:certificate/8edb07b2-af35-4044-8424-4c239ab798d7
+    ACM_CERT_ARN: arn:aws:acm:us-east-1:366399188066:certificate/2e660c61-bc44-45b6-a6f5-769f43866ef8
 resources:
   Resources:
     NumberAreNice:
