@@ -1,8 +1,8 @@
 const CONFIG = {
-  countOfInitiallyShownPosts: 5,
-  countOfPostsDynamicallyAdded: 5,
-  countOfInitiallyShownProducts: 5,
-  countOfProductsDynamicallyAdded: 5,
+  countOfInitiallyShownPosts: 4,
+  countOfPostsDynamicallyAdded: 4,
+  countOfInitiallyShownProducts: 4,
+  countOfProductsDynamicallyAdded: 4,
   offsetHeightToTriggerLoading: 20,
 }
 

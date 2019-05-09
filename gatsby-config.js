@@ -5,22 +5,19 @@ module.exports = {
       name: "Numbers are nice",
       image: "/img/logo.svg",
       biography:
-        "Clear, easy to follow math posters.",
+        "Clear, easy to follow math posters. We're startng with multiplication tables, but we hope to add more math posters soon.",
     },
     // for a list of supported networks take a look at https://jaketrent.github.io/react-social-icons/
     networks: [],
     about:
-      '<p>A lightweight, mobile first blog starter with infinite scroll \
-    and Material-UI design elements for \
-    <a href="https://github.com/gatsbyjs/gatsby" target="_blank">Gatsby</a>. </p> \
-    <p>For a quick start with this starter checkout the \
-    <a href="/posts/get-started/get-started/">Get Started</a> guide. For \
-    an overview of plugins used in this starter have a look at \
-    <a href="/posts/gatsby-plugins/gatsby-plugins/">Plugins</a>. \
-    To see a markdown blog entry in action click \
-    <a href="/posts/markdown/markdown-test/">here</a>. \
-    </p> \
-    ',
+      `<p>Why do posters for kids have to be badly designed 
+    with clunky fonts and cartoonish typography?</p> 
+    <p>It's time to give our kids the quality they deserve 
+    with math posters that are clear and easy to follow.</p>
+    <p>Our products are well designed using a neat alignment and judicious typography
+    with key information in big type
+    so that the important things are retained more easily</p> \
+    `,
   },
   plugins: [
     `gatsby-plugin-tslint`,
