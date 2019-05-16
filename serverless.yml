@@ -17,8 +17,7 @@ custom:
   cloudfrontInvalidate:
     distributionIdKey: 'NumberAreNiceCloudFrontDistributionId'
     items:
-      - '/index.html'
-      - '/static/*'
+      - '/*'
 provider:
   name: aws
   runtime: nodejs8.10

@@ -1,10 +1,12 @@
 import * as React from "react"
 import Button from "@material-ui/core/Button"
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
+
 import THEME from "../../theme"
 
 export default (props) => (
-  <div style={{ float: "right" }}>
-    <a 
+  <div className={`buy-button ${ props.inline && "buy-button--inline"}`} style={props.style}>
+    <OutboundLink 
       href={props.url} 
       style={{ 
         textDecoration: "none",
@@ -26,6 +28,6 @@ export default (props) => (
       >
        From {props.price}
       </Button>
-    </a>
+    </OutboundLink>
   </div>
 )

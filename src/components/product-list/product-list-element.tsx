@@ -23,7 +23,7 @@ interface IProductListElement {
 
 export default ({ data }: IProductListElement) => (
   <div style={{ marginTop: 25, marginBottom: 25 }}>
-    <Card>
+    <Card style={{ position: "relative"}}>
       <CardActionArea>
         <Link
           to={data.slug}
@@ -35,10 +35,10 @@ export default ({ data }: IProductListElement) => (
           {data.coverFluid ? <Image fluid={data.coverFluid} /> : null}
         </Link>
         <CardContent>
-          <BuyButton price={data.price} url={data.url}/>
           <Typography component="p">{data.title}</Typography>
         </CardContent>
       </CardActionArea>
+      <BuyButton price={data.price} url={data.url} style={{top: 10, right:10}}/>
     </Card>
   </div>
 )

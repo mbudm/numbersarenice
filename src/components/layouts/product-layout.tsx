@@ -20,7 +20,9 @@ interface IContentAreaProps {
 }
 
 interface IHeaderArea {
-  cover: FluidObject
+  cover: FluidObject,
+  price: string,
+  url
 }
 
 interface IProductLayout {
@@ -35,17 +37,17 @@ interface IProductLayout {
 const ContentArea = ({ title, description, tags, price, url }: IContentAreaProps) => (
   <>
     <Default>
-      <Card style={{ padding: 50 }}>
+      <Card style={{ padding: 50, position: "relative" }}>
         <h1 style={{ marginBottom: 30, marginTop: 0, textAlign: "center" }}>
           {title}
         </h1>
-        <BuyButton price={price} url={url} />
         <p>{description}</p>
         <small>{tags}</small>
+        <BuyButton price={price} url={url} inline={true}/>
       </Card>
     </Default>
     <Mobile>
-      <Card style={{ padding: 15 }}>
+      <Card style={{ padding: 15, position: "relative" }}>
         <h1
           style={{
             marginBottom: 30,
@@ -56,25 +58,26 @@ const ContentArea = ({ title, description, tags, price, url }: IContentAreaProps
           }}
         >
           {title}
-        </h1>        
+        </h1>
         <p>{description}</p>
         <small>{tags}</small>
-        <h2>{price}</h2>
+        <BuyButton price={price} url={url} inline={true}/>
       </Card>
     </Mobile>
   </>
 )
 
-const HeaderArea = ({ cover }: IHeaderArea) => {
+const HeaderArea = ({ cover, price, url }: IHeaderArea) => {
   const goBack = () => window.history.back()
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <FabButton onClickHandler={goBack} />
       <div style={{ height: "auto", width: "auto" }}>
         {cover ? <Image fluid={cover} /> : null}
       </div>
-    </>
+      <BuyButton price={price} url={url} style={{top: 20, right: 20 }}/>
+    </div>
   )
 }
 
@@ -92,12 +95,12 @@ export default ({ title, cover, description, tags, price, url }: IProductLayout)
             paddingBottom: 40,
           }}
         >
-          <HeaderArea cover={cover} />
+          <HeaderArea cover={cover} price={price} url={url}/>
           <ContentArea title={title} description={description} tags={tags} price={price} url={url}/>
         </div>
       </Default>
       <Mobile>
-        <HeaderArea cover={cover} />
+        <HeaderArea cover={cover} price={price} url={url}/>
         <ContentArea title={title} description={description} tags={tags} price={price} url={url}/>
       </Mobile>
     </div>
