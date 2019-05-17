@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint-react", "tslint-microsoft-contrib/recommended"],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
   "rules": {
     "export-name": false,

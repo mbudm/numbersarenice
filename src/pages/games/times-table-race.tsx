@@ -1,8 +1,8 @@
-import React, { useState } from "react"
 import Card from "@material-ui/core/Card"
+import React, { useRef, useState } from "react"
 import Responsive from "react-responsive"
-import FabButton from "../../components/shared/FabButton"
 
+import FabButton from "../../components/shared/FabButton"
 import THEME from "../../theme"
 
 const START = "START"
@@ -19,12 +19,27 @@ const StartScreen = ({ startGame }) => (
   </div>
 )
 
-const PlayScreen = ({ question, editAnswer, submitAnswer }) => (
-  <div>
-    <p>{question.a} x {question.b} = <input placeholder="?" onChange={editAnswer}/></p>
-    <button onClick={submitAnswer}>Submit</button>
-  </div>
-)
+const PlayScreen = ({ question, answer, editAnswer, submitAnswer }) => {
+  const inputEl = useRef(null);
+  const onSubmit = (e) => {
+    inputEl.current.focus()
+    submitAnswer.apply(null, e)
+  };
+  return (
+    <div>
+      <p>{question.a} x {question.b} = 
+        <input 
+          autoFocus={true} 
+          placeholder="?" 
+          value={answer} 
+          onChange={editAnswer}
+          ref={inputEl}
+        />
+      </p>
+      <button onClick={onSubmit}>Submit</button>
+    </div>
+  )
+}
 
 const CompleteScreen = ({ resetGame, questions, answers, time}) => (
   <div>
@@ -58,7 +73,6 @@ const gameScreens = {
   [COMPLETE]: props => <CompleteScreen {...props} />
 }
 
-
 const useGameStatus = (status, setStartTime, setEndTime) => {
   const [gameStatus, setGameStatus] = React.useState(status);
 
@@ -77,21 +91,25 @@ const useGameStatus = (status, setStartTime, setEndTime) => {
   return [gameStatus, setGameStatus];
 };
 
-
 const ContentArea = () => {
-  const [questions] = useState(generateQuestions())
+  const [questions, setQuestions] = useState([])
   const [startTime, setStartTime] = useState(0)
   const [endTime, setEndTime] = useState(0)
   const [gameStatus, setGameStatus] = useGameStatus(START, setStartTime, setEndTime)
   const [gameRound, setGameRound] = useState(0)
-  const [answers, setAnswers] = useState([])
+  const [answers, setAnswers] = useState([]) 
 
   const gameProps = {
     [START]: {
-      startGame: () => setGameStatus(PLAY)
+      startGame: () => {
+        setAnswers([])
+        setGameRound(0)
+        setQuestions(generateQuestions())
+        setGameStatus(PLAY)
+      }
     },
     [PLAY]: {
-      question: questions[gameRound],
+      answer: answers[gameRound] || "",
       editAnswer: (event) => {
         const newAnswers = [...answers]
         if(gameRound === newAnswers.length){
@@ -101,7 +119,11 @@ const ContentArea = () => {
         }
         setAnswers(newAnswers)
       },
+      question: questions[gameRound],
       submitAnswer: () => {
+        if(answers.length <= gameRound){
+          return
+        }
         if (answers.length < NUM_ROUNDS){
           setGameRound(gameRound + 1)
         }else{
@@ -110,9 +132,9 @@ const ContentArea = () => {
       }
     },
     [COMPLETE]: {
-      resetGame: () => setGameStatus(START),
-      questions,
       answers,
+      questions,
+      resetGame: () => setGameStatus(START),
       time: endTime - startTime
     }
   }
@@ -123,9 +145,9 @@ const ContentArea = () => {
       <h1
         style={{
           marginBottom: 30,
-          marginTop: 0,
           marginLeft: 30,
           marginRight: 30,
+          marginTop: 0,
           textAlign: "center",
         }}
       >
@@ -139,7 +161,7 @@ const ContentArea = () => {
         <dt>startTime</dt>
         <dd>{startTime}</dd>
         <dt>answers</dt>
-        <dd>{answers}</dd>
+        <dd>{answers.length}</dd>
       </dl>
       {gameScreen}
     </Card>
@@ -163,12 +185,12 @@ export default () => {
         >
           <div
             style={{
-              maxWidth: THEME.aboutPage.layout.cardMaxWidth,
               margin: "0 auto",
-              paddingTop: 40,
+              maxWidth: THEME.aboutPage.layout.cardMaxWidth,
+              paddingBottom: 40,
               paddingLeft: 20,
               paddingRight: 20,
-              paddingBottom: 40,
+              paddingTop: 40,
             }}
           >
             <HeaderArea />

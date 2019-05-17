@@ -1,38 +1,16 @@
 const THEME = {
-  blogPost: {
+  aboutPage: {
     layout: {
-      cardMaxWidth: 1000,
       backgroundColor: "#eeeedd",
-    },
-    showMoreButton: {
-      color: "#059ce2",
-      borderColor: "#059ce2",
-      backgroundColor: "none",
-      width: 130,
-    },
-  },
-  blogListElement: {
-    avatar: {
-      color: "none",
-      backgroundColor: "#059ce2",
-    },
-  },
-  index: {
-    layout: {
-      cardSectionMaxWidth: 800,
-      backgroundColor: "#eeeeee",
-    },
-    header: {
-      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #726030, #b5a067)",
-    },
-    aboutButton: {
-      color: "white",
-      borderColor: "white",
-      backgroundColor: "none",
-      width: 100,
+      cardMaxWidth: 800,
     },
   },
   author: {
+    desc: {
+      color: "white",
+      fontSize: 20,
+      maxWidth: 500,
+    },
     logo: {
       width: "60%",
     },
@@ -40,30 +18,52 @@ const THEME = {
       color: "white",
       fontSize: 30,
     },
-    desc: {
-      color: "white",
-      fontSize: 20,
-      maxWidth: 500,
+  },
+  blogListElement: {
+    avatar: {
+      backgroundColor: "#059ce2",
+      color: "none",
     },
   },
-  callToActionButton: {
-    width: 25,
-    height: 25,
-  },
-  fabButton: {
-    color: "#059ce2",
-    backgroundColor: "white",
+  blogPost: {
+    layout: {
+      backgroundColor: "#eeeedd",
+      cardMaxWidth: 1000,
+    },
+    showMoreButton: {
+      backgroundColor: "none",
+      borderColor: "#059ce2",
+      color: "#059ce2",
+      width: 130,
+    },
   },
   buyButton: {
-    color: "white",
-    borderColor: "white",
     backgroundColor: "#05d22c",
+    borderColor: "white",
+    color: "white",
     width: 140,
   },
-  aboutPage: {
+  callToActionButton: {
+    height: 25,
+    width: 25,
+  },
+  fabButton: {
+    backgroundColor: "white",
+    color: "#059ce2",
+  },
+  index: {
+    aboutButton: {
+      backgroundColor: "none",
+      borderColor: "white",
+      color: "white",
+      width: 100,
+    },
+    header: {
+      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #726030, #b5a067)",
+    },
     layout: {
-      cardMaxWidth: 800,
-      backgroundColor: "#eeeedd",
+      backgroundColor: "#eeeeee",
+      cardSectionMaxWidth: 800,
     },
   },
 }

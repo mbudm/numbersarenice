@@ -3,6 +3,5 @@
     "experimentalDecorators": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true
-  },
-  "extends": ["tslint:latest", "tslint-config-prettier"]
+  }
 }
