@@ -6,12 +6,15 @@ import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";
 import { StartScreen } from "./StartScreen";
 
+import { hasLocalStorage }  from "../common/hasStorage"
+
 export const GameContext = createContext(null);
 
 export const START = "START"
 export const PLAY = "PLAY"
 export const COMPLETE = "COMPLETE"
-export const NUM_ROUNDS = 10;
+export const NUM_ROUNDS = 10
+export const GAME_KEY = "nn_tt_speed" // for localstorage
 
 const gameScreens = {
   [START]: <StartScreen />,
@@ -19,22 +22,32 @@ const gameScreens = {
   [COMPLETE]: <CompleteScreen />
 };
 
+
+const updateLeaderboard = () => {
+
+}
+
+
 const useGameStatus = (status, setStartTime, setEndTime) => {
   const [gameStatus, setGameStatus] = React.useState(status);
-  React.useEffect(() => {
-    if (gameStatus === PLAY) {
+  const gameStatusEffects = {
+    [PLAY]: () => {
       setStartTime(Date.now());
-    }
-    ;
-  }, [gameStatus]);
-  React.useEffect(() => {
-    if (gameStatus === COMPLETE) {
+    },
+    [COMPLETE]: () => {
       setEndTime(Date.now());
+      if(hasLocalStorage()){
+        updateLeaderboard()
+      }
     }
-    ;
+  }
+
+  React.useEffect(() => {
+    gameStatusEffects[gameStatus]()
   }, [gameStatus]);
   return [gameStatus, setGameStatus];
 };
+
 export const Game = () => {
   const [questions, setQuestions] = useState([]);
   const [startTime, setStartTime] = useState(0);
