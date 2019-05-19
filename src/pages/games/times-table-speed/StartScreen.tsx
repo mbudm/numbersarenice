@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
-import { hasLocalStorage }  from "../common/hasStorage"
 import { LeaderBoard } from "../common/Leaderboard"
-import { GAME_KEY, GameContext, NUM_ROUNDS, PLAY} from "./Game"
+import { GameContext, NUM_ROUNDS, PLAY} from "./Game"
+import { getLeaderboardData } from "./getLeaderboardData";
 
 const generateQuestions = () =>
   Array.from({ length: NUM_ROUNDS }).map(() => ({
@@ -10,20 +10,6 @@ const generateQuestions = () =>
     // tslint:disable-next-line:insecure-random
     b: Math.ceil(Math.random() * 12),
   }))
-
-const getLeaderboardData = () => {
-  let rows = []
-  if(!hasLocalStorage()){
-    return rows
-  }
-  try {
-    const data = localStorage.getItem(GAME_KEY)
-    rows = JSON.parse(data)
-  } catch (e) {
-    // No localstorage, or empty leaderboard
-  }
-  return rows
-}
 
 export const StartScreen = () => {
   const { setAnswers, setGameRound, setGameStatus, setQuestions } = useContext(
@@ -39,7 +25,7 @@ export const StartScreen = () => {
   return (
     <div>
       <button onClick={startGame}>Start game</button>
-      {leaderboardData && <LeaderBoard rows={leaderboardData} />}
+      {leaderboardData.length > 0 && <LeaderBoard rows={leaderboardData} />}
     </div>
   )
 }
