@@ -63,7 +63,7 @@ export const Game = () => {
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
   const [gameRound, setGameRound] = useState(0);
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState<number[]>([]);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState(gameDifficulty.EASY);
 

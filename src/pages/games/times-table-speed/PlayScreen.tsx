@@ -1,6 +1,20 @@
 import React, { useContext, useRef } from "react"
 import { COMPLETE, GameContext, NUM_ROUNDS } from "./Game"
 
+
+interface IQuestion {
+  a: number,
+  b: number
+}
+
+interface IPlayScreenContext {
+  questions: IQuestion[]
+  answers: number[]
+  gameRound: number
+  setAnswers: (answers: number[]) => void
+  setGameRound: (gameRound:number) => void
+  setGameStatus: (gameStatus:string) => void
+}
 export const PlayScreen = () => {
   const {
     questions,
@@ -9,7 +23,7 @@ export const PlayScreen = () => {
     setAnswers,
     setGameRound,
     setGameStatus,
-  } = useContext(GameContext)
+  }: IPlayScreenContext = useContext(GameContext)
 
   const inputEl = useRef(null)
 
@@ -29,11 +43,11 @@ export const PlayScreen = () => {
   }
 
   const handleChange = event => {
-    const newAnswers = [...answers]
+    const newAnswers:number[] = [...answers]
     if (gameRound === newAnswers.length) {
-      newAnswers.push(event.target.value)
+      newAnswers.push(event.target.value * 1)
     } else {
-      newAnswers[gameRound] = event.target.value
+      newAnswers[gameRound] = event.target.value * 1
     }
     setAnswers(newAnswers)
   }

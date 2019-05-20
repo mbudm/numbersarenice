@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 
 import { hasLocalStorage } from "../common/hasStorage";
 import { LeaderBoard } from "../common/Leaderboard";
@@ -14,9 +14,11 @@ const getGameLeaderboard = (gameData) => {
   const gameIndex = leaderboardData.findIndex((l,i,arr) => {
     return l.score <= gameData.score && (!!(arr.length -1 > i) || arr[i+1] >= gameData.score)
   })
-  return leaderboardData.length >= 4 ?
-    [...leaderboardData.slice(gameIndex -2, 2), gameData, ...leaderboardData.slice(gameIndex, 2)] :
-    [gameData];
+  return [
+    ...leaderboardData.slice(gameIndex -2, 2),
+    gameData,
+    ...leaderboardData.slice(gameIndex, 2)
+  ]
 }
 
 export const CompleteScreen = () => {
@@ -31,12 +33,13 @@ export const CompleteScreen = () => {
   } = useContext(
     GameContext
   )
+  const [name, setName] = useState("")
   const resetGame = () => setGameStatus(START)
 
   const gameData: ILeaderboardEntry = {
     difficulty,
     endTime,
-    name: "",
+    name,
     score,
     startTime
   }
@@ -44,8 +47,9 @@ export const CompleteScreen = () => {
   const gameLeaderboardData = getGameLeaderboard(gameData)
   const editRow = gameLeaderboardData.findIndex((data) => gameData.startTime === data.startTime)
 
-  const onEditLeaderboardEntry = (name) => {
-    updateLeaderboard({...gameData, name})
+  const onEditLeaderboardEntry = (n) => {
+    setName(n)
+    updateLeaderboard({...gameData, name: n}) // useEffect
   }
 
   return (
