@@ -1,7 +1,7 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { LeaderBoard } from "../common/Leaderboard"
 import { GameContext, NUM_ROUNDS, PLAY} from "./Game"
-import { getLeaderboardData } from "./getLeaderboardData";
+import { getLeaderboardData, resetLeaderboard } from "./getLeaderboardData";
 
 const generateQuestions = () =>
   Array.from({ length: NUM_ROUNDS }).map(() => ({
@@ -15,17 +15,26 @@ export const StartScreen = () => {
   const { setAnswers, setGameRound, setGameStatus, setQuestions } = useContext(
     GameContext
   )
-  const leaderboardData = getLeaderboardData()
+  const [leaderboardData, setLeaderboarData] = useState(getLeaderboardData())
   const startGame = () => {
     setAnswers([])
     setGameRound(0)
     setQuestions(generateQuestions())
     setGameStatus(PLAY)
   }
+  const onResetLeaderboard = () => {
+    setLeaderboarData([])
+    resetLeaderboard()
+  }
   return (
     <div>
       <button onClick={startGame}>Start game</button>
-      {leaderboardData.length > 0 && <LeaderBoard rows={leaderboardData} />}
+      {leaderboardData.length > 0 &&
+        <p>
+          <LeaderBoard rows={leaderboardData} />
+          <a onClick={onResetLeaderboard} >Reset leaderboard</a>
+        </p>
+      }
     </div>
   )
 }

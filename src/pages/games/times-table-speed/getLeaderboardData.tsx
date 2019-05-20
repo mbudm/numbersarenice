@@ -43,3 +43,16 @@ export const updateLeaderboard = (gameData: ILeaderboardEntry) => {
   }
   return updatedRows;
 }
+
+export const resetLeaderboard = () => {
+  if (!hasLocalStorage()) {
+    return
+  }
+  try {
+    localStorage.setItem(GAME_KEY, "");
+  }
+  catch (e) {
+    // No localstorage, or empty leaderboard
+  }
+  return
+}
