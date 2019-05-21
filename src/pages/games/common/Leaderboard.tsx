@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import * as React from "react";
 
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
@@ -18,7 +18,7 @@ interface ILeaderboardProps {
 const validEditRow = (row:number, rows:ILeaderboardEntry[]) => row >= 0 && row < rows.length
 
 export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
-  const [editToggle, setEditToggle] = useState(validEditRow(editRow, rows))
+  const [editToggle, setEditToggle] = React.useState(validEditRow(editRow, rows))
   const onEditRow = (name) => {
     setEditToggle(false)
     onEdit(name)
@@ -55,7 +55,7 @@ export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
 }
 
 const EditName = ({onEdit}) => {
-  const [name, setName] = useState("")
+  const [name, setName] = React.useState("")
   const onChange = (e) => setName(e.target.value)
   const onSubmit = (e) => onEdit(name)
   return (

@@ -19,7 +19,8 @@
     "no-single-line-block-comment": false,
     "prefer-array-literal": false,
     "jsx-no-multiline-js": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-implicit-dependencies": [true, "dev"]
   },
   "linterOptions": {
     "exclude": ["./node-moudles/**/*.ts"]

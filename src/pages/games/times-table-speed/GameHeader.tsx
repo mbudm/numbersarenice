@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import * as React from "react";
+
 import { GameContext } from "./Game";
 export const GameHeader = () => {
-  const { answers, gameRound, gameStatus, startTime } = useContext(GameContext);
+  const { answers, gameRound, gameStatus, startTime } = React.useContext(GameContext);
   return (<>
     <h1 style={{
       marginBottom: 30,

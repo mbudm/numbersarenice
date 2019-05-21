@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react"
+import * as React from "react";
+
 import { LeaderBoard } from "../common/Leaderboard"
 import { GameContext, NUM_ROUNDS, PLAY} from "./Game"
 import { getLeaderboardData, resetLeaderboard } from "./getLeaderboardData";
@@ -12,10 +13,10 @@ const generateQuestions = () =>
   }))
 
 export const StartScreen = () => {
-  const { setAnswers, setGameRound, setGameStatus, setQuestions } = useContext(
+  const { setAnswers, setGameRound, setGameStatus, setQuestions } = React.useContext(
     GameContext
   )
-  const [leaderboardData, setLeaderboarData] = useState(getLeaderboardData())
+  const [leaderboardData, setLeaderboarData] = React.useState(getLeaderboardData())
   const startGame = () => {
     setAnswers([])
     setGameRound(0)

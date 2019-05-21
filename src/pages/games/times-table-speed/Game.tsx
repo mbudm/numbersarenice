@@ -1,14 +1,12 @@
 import Card from "@material-ui/core/Card";
-import React, { createContext, useState } from "react";
+import * as React from "react";
 
 import { CompleteScreen } from "./CompleteScreen";
 import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";
 import { StartScreen } from "./StartScreen";
 
-import { hasLocalStorage }  from "../common/hasStorage"
-
-export const GameContext = createContext(null);
+export const GameContext = React.createContext(null);
 
 export const START = "START"
 export const PLAY = "PLAY"
@@ -17,9 +15,9 @@ export const NUM_ROUNDS = 2
 export const GAME_KEY = "nn_tt_speed" // for localstorage
 
 const gameScreens = {
-  [START]: <StartScreen />,
-  [PLAY]: <PlayScreen />,
-  [COMPLETE]: <CompleteScreen />
+  [START]: (<StartScreen />),
+  [PLAY]: (<PlayScreen />),
+  [COMPLETE]: (<CompleteScreen />)
 };
 
 const gameDifficulty = {
@@ -59,13 +57,13 @@ const useGameStatus = ({
 };
 
 export const Game = () => {
-  const [questions, setQuestions] = useState([]);
-  const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
-  const [gameRound, setGameRound] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [score, setScore] = useState(0);
-  const [difficulty, setDifficulty] = useState(gameDifficulty.EASY);
+  const [questions, setQuestions] = React.useState([]);
+  const [startTime, setStartTime] = React.useState(0);
+  const [endTime, setEndTime] = React.useState(0);
+  const [gameRound, setGameRound] = React.useState(0);
+  const [answers, setAnswers] = React.useState<number[]>([]);
+  const [score, setScore] = React.useState(0);
+  const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY);
 
   const [gameStatus, setGameStatus] = useGameStatus({
     answers,
