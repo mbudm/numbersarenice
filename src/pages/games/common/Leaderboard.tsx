@@ -24,7 +24,7 @@ export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
     onEdit(name)
   }
   return (
-    <Table>
+    <Table data-testid="leaderboard">
       <TableHead>
         <TableRow>
           <TableCell></TableCell>
@@ -59,9 +59,9 @@ const EditName = ({onEdit}) => {
   const onChange = (e) => setName(e.target.value)
   const onSubmit = (e) => onEdit(name)
   return (
-    <span>
+    <span data-testid="edit-name">
       <input type="text" value={name} onChange={onChange} placeholder="Your name"/>
-      <button onClick={onSubmit}>Save</button>
+      <button data-testid="edit-name-save-button"onClick={onSubmit}>Save</button>
     </span>
   )
 }

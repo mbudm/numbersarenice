@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import Responsive from "react-responsive"
 
 import FabButton from "../../components/shared/FabButton"

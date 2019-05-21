@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react"
+import * as React from "react"
 import { COMPLETE, GameContext, NUM_ROUNDS } from "./Game"
 
 
@@ -23,9 +23,9 @@ export const PlayScreen = () => {
     setAnswers,
     setGameRound,
     setGameStatus,
-  }: IPlayScreenContext = useContext(GameContext)
+  }: IPlayScreenContext = React.useContext(GameContext)
 
-  const inputEl = useRef(null)
+  const inputEl = React.useRef(null)
 
   const answer = answers[gameRound] || ""
   const question = questions[gameRound]
@@ -58,7 +58,7 @@ export const PlayScreen = () => {
   }
 
   return (
-    <div>
+    <div data-testid="play-screen">
       <p>
         {question.a} x {question.b} =
         <input

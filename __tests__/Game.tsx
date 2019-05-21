@@ -1,27 +1,59 @@
+// tslint:disable-next-line:no-implicit-dependencies
+import "jest-dom/extend-expect"
 import * as React from 'react';
 import {
   fireEvent,
   getByTestId,
+  queryByTestId,
   render
 } from "react-testing-library";
 import { Game } from "../src/pages/games/times-table-speed/Game";
 
-it("Game loads with initial state of START", () => {
-  const { container } = render(<Game />);
-  const countValue = getByTestId(container, "countvalue");
-  expect(countValue.textContent).toBe("0");
-});
+describe("Start Screen - initial state", () => {
 
-it("Start button works", () => {
-  const { container } = render(<Game />);
-  const countValue = getByTestId(container, "countvalue");
-  const increment = getByTestId(container, "incrementButton");
-  const decrement = getByTestId(container, "decrementButton");
+  it("Game loads with initial state of START", () => {
+    const { container } = render(<Game />);
+    const startScreen = getByTestId(container, "start-screen");
+    expect(startScreen).toBeInTheDocument()
+  });
 
-  expect(countValue.textContent).toBe("0");
+  it("No leaderboard is displayed, as no local data exists", () => {
+    const { container } = render(<Game />);
+    expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(HTMLElement);
+  })
 
-  fireEvent.click(increment);
-  expect(countValue.textContent).toBe("1");
-  fireEvent.click(decrement);
-  expect(countValue.textContent).toBe("0");
-});
+  it("No leaderboard reset link is displayed, as no leaderboard exists", () => {
+    const { container } = render(<Game />);
+    expect(queryByTestId(container, "reset-leaderboard-anchor")).not.toBeInstanceOf(HTMLElement);
+  })
+
+  it("Start button changes the screen to play screen", () => {
+    const { container } = render(<Game />);
+    const startButton = getByTestId(container, "start-button");
+
+    fireEvent.click(startButton);
+    expect(queryByTestId(container, "start-screen")).not.toBeInstanceOf(HTMLElement);
+    expect(queryByTestId(container, "play-screen")).toBeInstanceOf(HTMLElement);
+  });
+})
+
+// const startGame = (container) => {
+//   const startButton = getByTestId(container, "start-button");
+//   fireEvent.click(startButton);
+// }
+
+// const answerQuestion = (container) => {
+//   const startButton = getByTestId(container, "start-button");
+//   fireEvent.click(startButton);
+// }
+
+// describe("Play Screen ", () => {
+
+// })
+
+// describe("Complete Screen - first game", () => {
+// })
+
+// describe("Multiple games", () => {
+// })
+

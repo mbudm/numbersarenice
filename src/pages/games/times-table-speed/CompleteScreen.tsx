@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import * as React from "react"
 
 import { hasLocalStorage } from "../common/hasStorage";
 import { LeaderBoard } from "../common/Leaderboard";
@@ -30,10 +30,10 @@ export const CompleteScreen = () => {
     score,
     setGameStatus,
     startTime
-  } = useContext(
+  } = React.useContext(
     GameContext
   )
-  const [name, setName] = useState("")
+  const [name, setName] = React.useState("")
   const resetGame = () => setGameStatus(START)
 
   const gameData: ILeaderboardEntry = {
