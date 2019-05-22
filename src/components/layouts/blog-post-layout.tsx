@@ -1,6 +1,6 @@
-import * as React from "react"
-import Image, { FluidObject } from "gatsby-image"
 import Card from "@material-ui/core/Card"
+import Image, { FluidObject } from "gatsby-image"
+import * as React from "react"
 import Responsive from "react-responsive"
 
 import THEME from "../../theme"
@@ -39,9 +39,9 @@ const ContentArea = ({ title, children }: IContentAreaProps) => (
         <h1
           style={{
             marginBottom: 30,
-            marginTop: 0,
             marginLeft: 70,
             marginRight: 70,
+            marginTop: 0,
             textAlign: "center",
           }}
         >
@@ -72,12 +72,12 @@ export default ({ title, cover, children }: IBlogPostLayout) => {
       <Default>
         <div
           style={{
-            maxWidth: THEME.blogPost.layout.cardMaxWidth,
             margin: "0 auto",
-            paddingTop: 40,
+            maxWidth: THEME.blogPost.layout.cardMaxWidth,
+            paddingBottom: 40,
             paddingLeft: 20,
             paddingRight: 20,
-            paddingBottom: 40,
+            paddingTop: 40,
           }}
         >
           <HeaderArea cover={cover} />

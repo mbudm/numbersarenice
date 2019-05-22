@@ -1,14 +1,14 @@
-import * as React from "react"
 import { graphql } from "gatsby"
+import { FluidObject } from "gatsby-image"
+import * as React from "react"
 import Layout from "../components/layouts/index-layout"
 import ProductList from "../components/product-list/product-list"
-import { FluidObject } from "gatsby-image"
 
 interface IProps {
   data: {
     allMarkdownRemark: {
       totalCount: number
-      edges: {
+      edges: Array<{
         node: {
           id: string
           frontmatter: {
@@ -28,13 +28,13 @@ interface IProps {
             excerpt: string
           }
         }
-      }[]
+      }>
     }
   }
 }
 
 class Products extends React.Component<IProps> {
-  render() {
+  public render() {
     const products = this.props.data.allMarkdownRemark.edges.map(
       (e: any) => e.node
     )

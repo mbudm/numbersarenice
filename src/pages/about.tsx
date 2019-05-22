@@ -1,6 +1,6 @@
-import * as React from "react"
-import { graphql } from "gatsby"
 import Card from "@material-ui/core/Card"
+import { graphql } from "gatsby"
+import * as React from "react"
 import Responsive from "react-responsive"
 import FabButton from "../components/shared/FabButton"
 
@@ -14,9 +14,9 @@ const ContentArea = ({ data }: any) => (
     <h1
       style={{
         marginBottom: 30,
-        marginTop: 0,
         marginLeft: 30,
         marginRight: 30,
+        marginTop: 0,
         textAlign: "center",
       }}
     >
@@ -47,12 +47,12 @@ export default ({ data }: any) => (
       >
         <div
           style={{
-            maxWidth: THEME.aboutPage.layout.cardMaxWidth,
             margin: "0 auto",
-            paddingTop: 40,
+            maxWidth: THEME.aboutPage.layout.cardMaxWidth,
+            paddingBottom: 40,
             paddingLeft: 20,
             paddingRight: 20,
-            paddingBottom: 40,
+            paddingTop: 40,
           }}
         >
           <HeaderArea />

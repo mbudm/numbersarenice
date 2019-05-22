@@ -1,11 +1,11 @@
+import { graphql, StaticQuery } from "gatsby"
 import * as React from "react"
-import { StaticQuery, graphql } from "gatsby"
 import Responsive from "react-responsive"
 
-import Author from "../me/author"
-import AboutButton from "../me/about-button"
-import CallToActionButton from "../me/calltoaction-button"
 import THEME from "../../theme"
+import AboutButton from "../me/about-button"
+import Author from "../me/author"
+import CallToActionButton from "../me/calltoaction-button"
 
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 const Default = props => <Responsive {...props} minWidth={768} />
@@ -47,8 +47,8 @@ const HeaderArea = ({ data, styles }: IHeaderArea) => (
     <AboutButton />
     <div
       style={{
-        paddingTop: styles.paddingTop,
         paddingBottom: styles.paddingBottom,
+        paddingTop: styles.paddingTop,
       }}
     >
       <Author author={data.site.siteMetadata.author} />

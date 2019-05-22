@@ -38,12 +38,12 @@ export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
         {rows.map((row, idx) => (
           <TableRow key={idx}>
             <TableCell align="right">{idx + 1}</TableCell>
-            {editToggle && idx === editRow ?
+            <TableCell component="th" scope="row">
+              {editToggle && idx === editRow ?
               <EditName onEdit={onEditRow} /> :
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
+              row.name
             }
+            </TableCell>
             <TableCell align="right">{row.score}</TableCell>
             <TableCell align="right">{gameTime(row.startTime, row.endTime)}</TableCell>
             <TableCell align="right">{row.difficulty}</TableCell>

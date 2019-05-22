@@ -57,20 +57,22 @@ export const CompleteScreen = () => {
       <p> Time: {gameTime(startTime, endTime)} seconds.  Score {score}</p>
       {gameLeaderboardData.length > 0 && <LeaderBoard rows={gameLeaderboardData} editRow={editRow} onEdit={onEditLeaderboardEntry}/>}
       <table>
-        {questions.map((q, i) => (
-          <tr key={`${i}-${q.a}x${q.b}`}>
-            <td>{q.a}</td>
-            <td>x</td>
-            <td>{q.b}</td>
-            <td>=</td>
-            <td>{answers[i]}</td>
-            <td>
-              {answers[i] === `${q.a * q.b}`
-                ? "Correct"
-                : `Incorrect (${q.a * q.b})`}
-            </td>
-          </tr>
-        ))}
+        <tbody>
+          {questions.map((q, i) => (
+            <tr key={`${i}-${q.a}x${q.b}`}>
+              <td>{q.a}</td>
+              <td>x</td>
+              <td>{q.b}</td>
+              <td>=</td>
+              <td>{answers[i]}</td>
+              <td>
+                {answers[i] === `${q.a * q.b}`
+                  ? "Correct"
+                  : `Incorrect (${q.a * q.b})`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <button onClick={resetGame}>Game complete. Reset game</button>
     </div>

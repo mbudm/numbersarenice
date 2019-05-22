@@ -31,10 +31,12 @@ export const StartScreen = () => {
     <div data-testid="start-screen">
       <button onClick={startGame} data-testid="start-button">Start game</button>
       {leaderboardData.length > 0 &&
-        <p>
+        <>
           <LeaderBoard rows={leaderboardData} />
-          <a onClick={onResetLeaderboard} data-testid="reset-leaderboard-anchor">Reset leaderboard</a>
-        </p>
+          <p>
+            <a onClick={onResetLeaderboard} data-testid="reset-leaderboard-anchor">Reset leaderboard</a>
+          </p>
+        </>
       }
     </div>
   )

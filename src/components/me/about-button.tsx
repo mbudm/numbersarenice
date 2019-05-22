@@ -1,6 +1,6 @@
-import * as React from "react"
-import { Link } from "gatsby"
 import Button from "@material-ui/core/Button"
+import { Link } from "gatsby"
+import * as React from "react"
 import THEME from "../../theme"
 
 export default () => (
@@ -9,11 +9,11 @@ export default () => (
       <Button
         variant="outlined"
         style={{
+          backgroundColor: THEME.index.aboutButton.backgroundColor,
+          borderColor: THEME.index.aboutButton.borderColor,
+          color: THEME.index.aboutButton.color,
           marginRight: 30,
           marginTop: 30,
-          color: THEME.index.aboutButton.color,
-          borderColor: THEME.index.aboutButton.borderColor,
-          backgroundColor: THEME.index.aboutButton.backgroundColor,
           textTransform: "none",
           width: THEME.index.aboutButton.width,
         }}

@@ -17,7 +17,7 @@ export const getLeaderboardData = (): ILeaderboardEntry[] => {
   }
   try {
     const data = localStorage.getItem(GAME_KEY);
-    rows = JSON.parse(data) || rows;
+    rows = data && data.length > 0 ? JSON.parse(data) : rows;
   }
   catch (e) {
     // tslint:disable-next-line:no-console

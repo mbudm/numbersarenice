@@ -1,6 +1,6 @@
-import * as React from "react"
-import { withPrefix, Link } from "gatsby"
 import Grid from "@material-ui/core/Grid"
+import { Link, withPrefix } from "gatsby"
+import * as React from "react"
 import THEME from "../../theme"
 
 interface IProps {
@@ -23,8 +23,8 @@ export default ({ author }: IProps) => {
         <img
           style={{
             alignItems: "baseline",
-            width: "100%",
             height: "auto",
+            width: "100%",
           }}
           src={withPrefix(author.image)}
           alt={author.name}
@@ -34,9 +34,9 @@ export default ({ author }: IProps) => {
         style={{
           color: THEME.author.desc.color,
           fontSize: THEME.author.desc.fontSize,
-          maxWidth: THEME.author.desc.maxWidth,
           margin: "auto",
           marginBottom: 20,
+          maxWidth: THEME.author.desc.maxWidth,
           textAlign: "center",
         }}
       >

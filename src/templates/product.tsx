@@ -1,7 +1,7 @@
-import * as React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layouts/product-layout"
 import { FluidObject } from "gatsby-image"
+import * as React from "react"
+import Layout from "../components/layouts/product-layout"
 
 interface IProduct {
   data: {
@@ -38,8 +38,8 @@ export default ({ data }: IProduct) => {
       } = node.frontmatter;
 
   return (
-    <Layout 
-      title={title} 
+    <Layout
+      title={title}
       cover={cover}
       description={description}
       price={price}

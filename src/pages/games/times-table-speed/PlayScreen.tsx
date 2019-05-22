@@ -25,7 +25,10 @@ export const PlayScreen = () => {
     setGameStatus,
   }: IPlayScreenContext = React.useContext(GameContext)
 
+  const [submitDisabled, setSubmitDisabled] = React.useState(true)
+
   const inputEl = React.useRef(null)
+  const submitEl = React.useRef(null)
 
   const answer = answers[gameRound] || ""
   const question = questions[gameRound]
@@ -36,6 +39,7 @@ export const PlayScreen = () => {
     }
     if (answers.length < NUM_ROUNDS) {
       inputEl.current.focus()
+      setSubmitDisabled(true)
       setGameRound(gameRound + 1)
     } else {
       setGameStatus(COMPLETE)
@@ -43,6 +47,12 @@ export const PlayScreen = () => {
   }
 
   const handleChange = event => {
+    const {value} = event.target
+    if(!Number.isInteger(Number.parseInt(value, 10))){
+      return
+    }
+    setSubmitDisabled(false)
+
     const newAnswers:number[] = [...answers]
     if (gameRound === newAnswers.length) {
       newAnswers.push(event.target.value * 1)
@@ -60,7 +70,8 @@ export const PlayScreen = () => {
   return (
     <div data-testid="play-screen">
       <p>
-        {question.a} x {question.b} =
+        <span data-testid="question-a">{question.a}</span> x
+        <span data-testid="question-b">{question.b}</span> =
         <input
           autoFocus={true}
           placeholder="?"
@@ -68,9 +79,15 @@ export const PlayScreen = () => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           ref={inputEl}
+          data-testid="answer"
         />
       </p>
-      <button onClick={handleSubmit}>Submit</button>
+      <button
+        data-testid="answer-submit"
+        onClick={handleSubmit}
+        ref={submitEl}
+        disabled={submitDisabled}
+      >Submit</button>
     </div>
   )
 }

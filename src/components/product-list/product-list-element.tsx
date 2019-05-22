@@ -1,13 +1,11 @@
-import * as React from "react"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
+import * as React from "react"
 
 import Card from "@material-ui/core/Card"
 import CardActionArea from "@material-ui/core/CardActionArea"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
-import CardHeader from "@material-ui/core/CardHeader"
-import THEME from "../../theme";
 import BuyButton from "./buy-button";
 
 interface IProductListElement {
@@ -28,8 +26,8 @@ export default ({ data }: IProductListElement) => (
         <Link
           to={data.slug}
           style={{
-            textDecoration: "none",
             color: "inherit",
+            textDecoration: "none",
           }}
         >
           {data.coverFluid ? <Image fluid={data.coverFluid} /> : null}

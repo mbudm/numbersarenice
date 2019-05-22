@@ -1,11 +1,11 @@
-import { observable, action } from "mobx"
+import { action, observable } from "mobx"
 import CONFIG from "../config"
 
 export class BlogPostStore {
-  @observable postsToShow: number = CONFIG.countOfInitiallyShownPosts
+  @observable public postsToShow: number = CONFIG.countOfInitiallyShownPosts
 
   @action
-  add() {
+  public add() {
     this.postsToShow += CONFIG.countOfPostsDynamicallyAdded
   }
 }

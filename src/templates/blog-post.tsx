@@ -1,7 +1,7 @@
-import * as React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layouts/blog-post-layout"
 import { FluidObject } from "gatsby-image"
+import * as React from "react"
+import Layout from "../components/layouts/blog-post-layout"
 
 interface IBlogPost {
   data: {

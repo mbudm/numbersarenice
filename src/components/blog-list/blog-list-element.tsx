@@ -1,13 +1,13 @@
-import * as React from "react"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
+import * as React from "react"
 
+import Avatar from "@material-ui/core/Avatar"
 import Card from "@material-ui/core/Card"
 import CardActionArea from "@material-ui/core/CardActionArea"
 import CardContent from "@material-ui/core/CardContent"
-import Typography from "@material-ui/core/Typography"
-import Avatar from "@material-ui/core/Avatar"
 import CardHeader from "@material-ui/core/CardHeader"
+import Typography from "@material-ui/core/Typography"
 import THEME from "../../theme";
 
 interface IBlogListElement {
@@ -27,17 +27,17 @@ export default ({ data }: IBlogListElement) => (
         <Link
           to={data.slug}
           style={{
-            textDecoration: "none",
             color: "inherit",
+            textDecoration: "none",
           }}
         >
           <CardHeader
             avatar={
               <Avatar
-                style={{ 
+                style={{
                   backgroundColor: THEME.blogListElement.avatar.backgroundColor,
-                  color: THEME.blogListElement.avatar.color, 
-                  textShadow: "none" 
+                  color: THEME.blogListElement.avatar.color,
+                  textShadow: "none"
                 }}
               >
                 {data.title.charAt(0).toUpperCase()}
