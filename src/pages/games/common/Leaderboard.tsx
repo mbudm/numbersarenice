@@ -34,14 +34,14 @@ export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
           <TableCell align="right">Difficulty</TableCell>
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody data-testid="leaderboard-tbody">
         {rows.map((row, idx) => (
-          <TableRow key={idx}>
+          <TableRow key={idx} data-testid={idx === editRow && "edit-row"}>
             <TableCell align="right">{idx + 1}</TableCell>
             <TableCell component="th" scope="row">
               {editToggle && idx === editRow ?
               <EditName onEdit={onEditRow} /> :
-              row.name
+              <span data-testid="player-name" >row.name</span>
             }
             </TableCell>
             <TableCell align="right">{row.score}</TableCell>
@@ -59,8 +59,8 @@ const EditName = ({onEdit}) => {
   const onChange = (e) => setName(e.target.value)
   const onSubmit = (e) => onEdit(name)
   return (
-    <span data-testid="edit-name">
-      <input type="text" value={name} onChange={onChange} placeholder="Your name"/>
+    <span>
+      <input data-testid="edit-name-input" type="text" value={name} onChange={onChange} placeholder="Your name"/>
       <button data-testid="edit-name-save-button"onClick={onSubmit}>Save</button>
     </span>
   )

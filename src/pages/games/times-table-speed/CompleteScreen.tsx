@@ -14,10 +14,12 @@ const getGameLeaderboard = (gameData) => {
   const gameIndex = leaderboardData.findIndex((l,i,arr) => {
     return l.score <= gameData.score && (!!(arr.length -1 > i) || arr[i+1] >= gameData.score)
   })
+  const rowsBefore = gameIndex;
+  const rowsAfter = Math.min(2, leaderboardData.length - gameIndex)
   return [
-    ...leaderboardData.slice(gameIndex -2, 2),
+    ...leaderboardData.slice(gameIndex - rowsBefore, rowsBefore),
     gameData,
-    ...leaderboardData.slice(gameIndex, 2)
+    ...leaderboardData.slice(gameIndex, rowsAfter)
   ]
 }
 
@@ -53,10 +55,10 @@ export const CompleteScreen = () => {
   }
 
   return (
-    <div>
-      <p> Time: {gameTime(startTime, endTime)} seconds.  Score {score}</p>
+    <div data-testid="complete-screen">
+      <p>Time: <span data-testid="game-time">{gameTime(startTime, endTime)}</span> seconds.  Score <span data-testid="game-score">{score}</span></p>
       {gameLeaderboardData.length > 0 && <LeaderBoard rows={gameLeaderboardData} editRow={editRow} onEdit={onEditLeaderboardEntry}/>}
-      <table>
+      <table data-testid="game-summary">
         <tbody>
           {questions.map((q, i) => (
             <tr key={`${i}-${q.a}x${q.b}`}>
@@ -74,7 +76,7 @@ export const CompleteScreen = () => {
           ))}
         </tbody>
       </table>
-      <button onClick={resetGame}>Game complete. Reset game</button>
+      <button onClick={resetGame} data-testid="reset-button">Play again</button>
     </div>
   )
 }
