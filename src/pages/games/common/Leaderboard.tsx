@@ -41,7 +41,7 @@ export const LeaderBoard = ({ rows, editRow, onEdit }: ILeaderboardProps ) => {
             <TableCell component="th" scope="row">
               {editToggle && idx === editRow ?
               <EditName onEdit={onEditRow} /> :
-              <span data-testid="player-name" >row.name</span>
+              <span data-testid="player-name" >{row.name}</span>
             }
             </TableCell>
             <TableCell align="right">{row.score}</TableCell>

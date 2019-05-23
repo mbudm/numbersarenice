@@ -197,6 +197,8 @@ describe("Multiple games - loaderboard saved to localstorage", () => {
     ).toBeInstanceOf(HTMLElement)
     const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
     expect(leaderboardTbody.childNodes.length).toBe(1)
+    const playerName = getByTestId(container, "player-name")
+    expect(playerName).toHaveTextContent("Neumann")
   })
 
   it("complete screen has current game and plus existing leaderboard", () => {
