@@ -6,21 +6,45 @@ import { GameContext, START } from "./Game"
 import { gameTime } from "./gameTime";
 import { getLeaderboardData, ILeaderboardEntry, updateLeaderboard } from "./getLeaderboardData";
 
+const LEADERBOARD_DISPLAY_LENGTH = 5
+
+export const getGameIndex = (
+  gameData: ILeaderboardEntry,
+  leaderboardData: ILeaderboardEntry[]
+) => {
+  const index = leaderboardData.findIndex((l) => l.score <= gameData.score)
+  return index < 0 ? leaderboardData.length : index
+}
+
+export const getLeaderboardAtGamePosition = (gameData, leaderboardData) => {
+  const gameIndex = getGameIndex(gameData, leaderboardData)
+  const leaderboardDataWithGameData = [
+    ...leaderboardData.slice(0, gameIndex),
+    gameData,
+    ...leaderboardData.slice(gameIndex)
+  ]
+  let gameLeaderboardAtGamePosition
+
+  if(leaderboardDataWithGameData.length <= LEADERBOARD_DISPLAY_LENGTH){
+    gameLeaderboardAtGamePosition = leaderboardDataWithGameData
+  }else{
+    const idealRows = (LEADERBOARD_DISPLAY_LENGTH - 1) / 2 // ideally we have equal before and after rows to show context
+    const afterGap = leaderboardData.length - gameIndex // slots after the game index
+    const beforeGap = gameIndex // slots before the gameIndex
+    const rowsBefore = afterGap < idealRows ? idealRows + (idealRows - afterGap) : Math.min(idealRows, beforeGap) // if there isn't enough rows after then show more before
+    const rowsAfter = beforeGap < idealRows ? idealRows + (idealRows - beforeGap) : Math.min(idealRows, afterGap) // if there isnt enough before then show more after
+    gameLeaderboardAtGamePosition = leaderboardDataWithGameData.slice(gameIndex - rowsBefore, gameIndex + rowsAfter + 1); // slice from the  rowsBefore the game data index to after the gameIndex plus rows after
+  }
+
+  return gameLeaderboardAtGamePosition
+}
+
 const getGameLeaderboard = (gameData) => {
   if(!hasLocalStorage()){
     return []
   }
   const leaderboardData = getLeaderboardData()
-  const gameIndex = leaderboardData.findIndex((l,i,arr) => {
-    return l.score <= gameData.score && (!!(arr.length -1 > i) || arr[i+1] >= gameData.score)
-  })
-  const rowsBefore = gameIndex;
-  const rowsAfter = Math.min(2, leaderboardData.length - gameIndex)
-  return [
-    ...leaderboardData.slice(gameIndex - rowsBefore, rowsBefore),
-    gameData,
-    ...leaderboardData.slice(gameIndex, rowsAfter)
-  ]
+  return getLeaderboardAtGamePosition(gameData, leaderboardData)
 }
 
 export const CompleteScreen = () => {

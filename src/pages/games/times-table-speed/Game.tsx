@@ -20,7 +20,7 @@ const gameScreens = {
   [COMPLETE]: (<CompleteScreen />)
 };
 
-const gameDifficulty = {
+export const gameDifficulty = {
   EASY: "easy",
   HARD: "hard",
   MEDIUM: "medium",

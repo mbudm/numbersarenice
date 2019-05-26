@@ -27,21 +27,26 @@ export const getLeaderboardData = (): ILeaderboardEntry[] => {
   return rows;
 };
 
+export const sortByScore = (rows) => {
+  const copy = [...rows]
+  return copy.sort((a, b) => b.score - a.score)
+}
+
 
 export const updateLeaderboard = (gameData: ILeaderboardEntry) => {
   const rows = getLeaderboardData()
   const updatedRows = [...rows, gameData]
-  updatedRows.sort((a, b) => b.score - a.score)
+  const sortedRows = sortByScore(updatedRows)
   if (!hasLocalStorage()) {
     return rows;
   }
   try {
-    localStorage.setItem(GAME_KEY, JSON.stringify(updatedRows));
+    localStorage.setItem(GAME_KEY, JSON.stringify(sortedRows));
   }
   catch (e) {
     // No localstorage, or empty leaderboard
   }
-  return updatedRows;
+  return sortedRows;
 }
 
 export const resetLeaderboard = () => {

@@ -11,7 +11,10 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "jest"
+    "test": "jest",
+    "watch": "jest --watch",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:debugwatch": "node --inspect node_modules/.bin/jest --watch --runInBand"
   },
   "dependencies": {
     "@babel/core": "^7.4.0",
