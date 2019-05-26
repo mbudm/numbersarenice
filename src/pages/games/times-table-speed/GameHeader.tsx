@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { GameContext } from "./Game";
+
 export const GameHeader = () => {
   const { answers, gameRound, gameStatus, startTime } = React.useContext(GameContext);
   return (<>

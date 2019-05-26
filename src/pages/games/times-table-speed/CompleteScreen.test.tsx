@@ -1,4 +1,4 @@
-import { getGameIndex, getLeaderboardAtGamePosition } from "./CompleteScreen"
+import { getLeaderboardAtGamePosition } from "./CompleteScreen"
 import { gameDifficulty } from "./Game"
 import { ILeaderboardEntry, sortByScore } from "./getLeaderboardData"
 
@@ -67,18 +67,6 @@ describe("getLeaderboardAtGamePosition", () => {
 
     expect(result.length).toBe(3)
     expect(result[0]).toEqual(gameData)
-  })
-
-  it("Leaderboard two items, game score is middle - gameIndex", () => {
-    const middleGameData = {
-      ...gameData,
-      score: 35,
-    }
-    const leaderboardData = [bulkLeaderboardData[1], bulkLeaderboardData[0]]
-
-    const result = getGameIndex(middleGameData, leaderboardData)
-
-    expect(result).toBe(1)
   })
 
   it("Leaderboard two items, game score is middle", () => {

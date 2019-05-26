@@ -4,7 +4,7 @@ import { hasLocalStorage } from "../common/hasStorage";
 import { LeaderBoard } from "../common/Leaderboard";
 import { GameContext, START } from "./Game"
 import { gameTime } from "./gameTime";
-import { getLeaderboardData, ILeaderboardEntry, updateLeaderboard } from "./getLeaderboardData";
+import { getLeaderboardData, ILeaderboardEntry, sortByScore, updateLeaderboard } from "./getLeaderboardData";
 
 const LEADERBOARD_DISPLAY_LENGTH = 5
 
@@ -12,17 +12,14 @@ export const getGameIndex = (
   gameData: ILeaderboardEntry,
   leaderboardData: ILeaderboardEntry[]
 ) => {
-  const index = leaderboardData.findIndex((l) => l.score <= gameData.score)
+  const index = leaderboardData.findIndex((l) => l === gameData)
   return index < 0 ? leaderboardData.length : index
 }
 
 export const getLeaderboardAtGamePosition = (gameData, leaderboardData) => {
-  const gameIndex = getGameIndex(gameData, leaderboardData)
-  const leaderboardDataWithGameData = [
-    ...leaderboardData.slice(0, gameIndex),
-    gameData,
-    ...leaderboardData.slice(gameIndex)
-  ]
+  const leaderboardDataWithGameData = sortByScore([...leaderboardData, gameData])
+  const gameIndex = getGameIndex(gameData, leaderboardDataWithGameData)
+
   let gameLeaderboardAtGamePosition
 
   if(leaderboardDataWithGameData.length <= LEADERBOARD_DISPLAY_LENGTH){
