@@ -7,7 +7,7 @@ import {
   queryByTestId,
   render,
 } from "react-testing-library"
-import { Game, NUM_ROUNDS } from "../src/pages/games/times-table-speed/Game"
+import { Game, NUM_ROUNDS } from "./Game"
 
 const startGame = container => {
   const startButton = getByTestId(container, "start-button")

@@ -2,5 +2,6 @@ module.exports = {
   setupFilesAfterEnv: [
     'react-testing-library/cleanup-after-each',
   ],
-  preset: 'ts-jest'
+  preset: 'ts-jest',
+  rootDir: 'src'
 }
