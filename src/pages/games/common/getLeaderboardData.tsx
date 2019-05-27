@@ -1,5 +1,4 @@
-import { hasLocalStorage } from "../common/hasStorage";
-import { GAME_KEY } from "./Game";
+import { hasLocalStorage } from "./hasStorage";
 
 
 export interface ILeaderboardEntry {
@@ -10,7 +9,7 @@ export interface ILeaderboardEntry {
   startTime: number
 }
 
-export const getLeaderboardData = (): ILeaderboardEntry[] => {
+export const getLeaderboardData = (GAME_KEY): ILeaderboardEntry[] => {
   let rows:ILeaderboardEntry[] = [];
   if (!hasLocalStorage()) {
     return rows;
@@ -32,11 +31,13 @@ export const sortByScore = (rows) => {
   return copy.sort((a, b) => b.score - a.score)
 }
 
+export const appendLeaderboard = (gameData: ILeaderboardEntry, GAME_KEY) => {
+  const rows = getLeaderboardData(GAME_KEY)
+  return updateLeaderboard([...rows, gameData], GAME_KEY)
+}
 
-export const updateLeaderboard = (gameData: ILeaderboardEntry) => {
-  const rows = getLeaderboardData()
-  const updatedRows = [...rows, gameData]
-  const sortedRows = sortByScore(updatedRows)
+export const updateLeaderboard = (rows: ILeaderboardEntry[], GAME_KEY):ILeaderboardEntry[] => {
+  const sortedRows = sortByScore(rows)
   if (!hasLocalStorage()) {
     return rows;
   }
@@ -49,7 +50,7 @@ export const updateLeaderboard = (gameData: ILeaderboardEntry) => {
   return sortedRows;
 }
 
-export const resetLeaderboard = () => {
+export const resetLeaderboard = (GAME_KEY) => {
   if (!hasLocalStorage()) {
     return
   }

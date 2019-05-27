@@ -28,19 +28,7 @@ describe("Start Screen - initial state", () => {
     expect(startScreen).toBeInTheDocument()
   })
 
-  it("No leaderboard is displayed, as no local data exists", () => {
-    const { container } = render(<Game />)
-    expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(
-      HTMLElement
-    )
-  })
 
-  it("No leaderboard reset link is displayed, as no leaderboard exists", () => {
-    const { container } = render(<Game />)
-    expect(
-      queryByTestId(container, "reset-leaderboard-anchor")
-    ).not.toBeInstanceOf(HTMLElement)
-  })
 
   it("Start button changes the screen to play screen", () => {
     const { container } = render(<Game />)
@@ -58,7 +46,7 @@ describe("Play Screen ", () => {
   let answerSubmit
 
   beforeEach(() => {
-    ;({ container } = render(<Game />))
+    ({ container } = render(<Game />))
     startGame(container)
     expect(queryByTestId(container, "play-screen")).toBeInstanceOf(HTMLElement)
     expect(queryByTestId(container, "question-a")).toBeInstanceOf(HTMLElement)
@@ -132,43 +120,6 @@ describe("Complete Screen - first game", () => {
     expect(queryByTestId(container, "leaderboard")).toBeInstanceOf(HTMLElement)
   })
 
-  it("leaderboard has one row", () => {
-    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
-    expect(leaderboardTbody.childNodes.length).toBe(1)
-  })
-
-  it("leaderboard row is edit-row, which has edit field (is editable)", () => {
-    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
-    expect(queryByTestId(leaderboardTbody, "edit-row")).toBeInstanceOf(
-      HTMLElement
-    )
-    expect(queryByTestId(leaderboardTbody, "edit-name-input")).toBeInstanceOf(
-      HTMLElement
-    )
-    expect(queryByTestId(leaderboardTbody, "player-name")).not.toBeInstanceOf(
-      HTMLElement
-    )
-    expect(
-      queryByTestId(leaderboardTbody, "edit-name-save-button")
-    ).toBeInstanceOf(HTMLElement)
-  })
-
-  it("enter name and submit, changes to text cell", () => {
-    const editRow = getByTestId(container, "edit-row")
-    const editName = getByTestId(editRow, "edit-name-input")
-    const editSaveButton = getByTestId(editRow, "edit-name-save-button")
-
-    fireEvent.change(editName, { target: { value: "Neumann" } })
-    fireEvent.click(editSaveButton)
-
-    expect(queryByTestId(editRow, "edit-name-input")).not.toBeInstanceOf(
-      HTMLElement
-    )
-    expect(queryByTestId(editRow, "player-name")).toBeInstanceOf(
-      HTMLElement
-    )
-  })
-
   it("reset button changes to start screen", () => {
     const resetButton = getByTestId(container, "reset-button")
     fireEvent.click(resetButton)
@@ -181,58 +132,3 @@ describe("Complete Screen - first game", () => {
   })
 })
 
-describe("Multiple games - loaderboard saved to localstorage", () => {
-
-  let container
-  beforeEach(() => {
-    ({ container } = render(<Game />))
-  })
-
-  it("start screen has leaderboard with 1 entry", () => {
-    expect(queryByTestId(container, "leaderboard")).toBeInstanceOf(
-      HTMLElement
-    )
-    expect(
-      queryByTestId(container, "reset-leaderboard-anchor")
-    ).toBeInstanceOf(HTMLElement)
-    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
-    expect(leaderboardTbody.childNodes.length).toBe(1)
-    const playerName = getByTestId(container, "player-name")
-    expect(playerName).toHaveTextContent("Neumann")
-  })
-
-  it("complete screen has current game and plus existing leaderboard", () => {
-    startGame(container)
-    const answerInput = getByTestId(container, "answer")
-    const answerSubmit = getByTestId(container, "answer-submit")
-    answerAll(answerInput, answerSubmit)
-
-    expect(queryByTestId(container, "complete-screen")).toBeInstanceOf(
-      HTMLElement
-    )
-
-    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
-    expect(leaderboardTbody.childNodes.length).toBe(2)
-  })
-
-  it("after saving another score, start screen has leaderboard with 2 entries", () => {
-    // arranging and acting a lot... hmm.
-    startGame(container)
-    const answerInput = getByTestId(container, "answer")
-    const answerSubmit = getByTestId(container, "answer-submit")
-    answerAll(answerInput, answerSubmit)
-    const editName = getByTestId(container, "edit-name-input")
-    const editSaveButton = getByTestId(container, "edit-name-save-button")
-    fireEvent.change(editName, { target: { value: "Neumann" } })
-    fireEvent.click(editSaveButton)
-    const resetButton = getByTestId(container, "reset-button")
-    fireEvent.click(resetButton)
-
-    // assert a lot too
-    expect(queryByTestId(container, "start-screen")).toBeInstanceOf(
-      HTMLElement
-    )
-    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
-    expect(leaderboardTbody.childNodes.length).toBe(2)
-  })
-})
