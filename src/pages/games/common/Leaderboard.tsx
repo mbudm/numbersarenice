@@ -146,7 +146,7 @@ const LeaderboardTable = ({ rows, editRow, storageKey }) => {
               {editToggle && idx === editRow ? (
                 <EditName onEdit={onEditRow} />
               ) : (
-                <span data-testid="player-name">{editName}</span>
+                <span data-testid="player-name">{idx === editRow ? editName : row.name}</span>
               )}
             </TableCell>
             <TableCell align="right" data-testid="score">{row.score}</TableCell>
