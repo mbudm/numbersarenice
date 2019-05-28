@@ -1,3 +1,8 @@
 export const gameTime = (startTime, endTime) => {
-  return `${Math.round((endTime - startTime) / 10) / 100}`;
-};
+  console.log('s',startTime, 'e', endTime)
+  // fix end time render issue
+  const time = endTime < startTime ?
+    Date.now() - startTime :
+    endTime - startTime
+  return Math.round((time) / 10) / 100
+}
