@@ -84,10 +84,12 @@ describe("Leaderboard", () => {
     fireEvent.click(editSaveButton)
 
     // assert
-    expect(queryByTestId(editRow, "edit-name-input")).not.toBeInstanceOf(
+    const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
+    expect(leaderboardTbody.childNodes.length).toBe(1)
+    expect(queryByTestId(container, "edit-name-input")).not.toBeInstanceOf(
       HTMLElement
     )
-    expect(queryByTestId(editRow, "player-name")).toBeInstanceOf(HTMLElement)
+    expect(queryByTestId(container, "player-name")).toBeInstanceOf(HTMLElement)
     const playerName = getByTestId(container, "player-name")
     expect(playerName).toHaveTextContent("Player 1")
   })
@@ -376,7 +378,7 @@ describe("Leaderboard", () => {
     )
   })
 
-  it("After reste, No leaderboard reset link is displayed, as no leaderboard exists", () => {
+  it("After reset, No leaderboard reset link is displayed, as no leaderboard exists", () => {
     const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
     expect(
       queryByTestId(container, "reset-leaderboard-anchor")

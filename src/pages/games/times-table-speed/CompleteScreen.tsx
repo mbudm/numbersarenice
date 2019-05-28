@@ -1,8 +1,8 @@
 import * as React from "react"
 
+import { gameTime } from "../common/gameTime";
 import { Leaderboard } from "../common/leaderboard/Leaderboard";
 import { GAME_KEY, GameContext, START } from "./Game"
-import { gameTime } from "../common/gameTime";
 
 export const CompleteScreen = () => {
   const {

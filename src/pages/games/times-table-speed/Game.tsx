@@ -29,14 +29,11 @@ export const gameDifficulty = {
 
 const useGameStatus = ({
   answers,
-  difficulty,
   initialStatus,
   questions,
   setStartTime,
   setScore,
   setEndTime,
-  setGameData,
-  startTime
 }) => {
   const [gameStatus, setGameStatus] = React.useState(initialStatus);
   const gameStatusEffects = {
@@ -44,20 +41,11 @@ const useGameStatus = ({
       setStartTime(Date.now());
     },
     [COMPLETE]: () => {
-      const endTime = Date.now()
-      setEndTime(endTime);
+      setEndTime(Date.now());
       const score = questions.filter((q, i) => {
         return (q.a * q.b) === answers[i]
       }).length / NUM_ROUNDS * 100
       setScore(score)
-      setGameData({
-        difficulty,
-        endTime,
-        name,
-        score,
-        startTime
-      })
-
     }
   }
 
@@ -67,7 +55,46 @@ const useGameStatus = ({
     }
   }, [gameStatus]);
   return [gameStatus, setGameStatus];
-};
+}
+
+const useGameData = ({
+    difficulty,
+    endTime,
+    score,
+    startTime
+}) => {
+
+  const [gameData, setGameData] = React.useState<ILeaderboardEntry>({
+    difficulty,
+    endTime,
+    name: "",
+    score,
+    startTime
+  })
+
+  React.useEffect(() => {
+    setGameData({
+      ...gameData,
+      endTime
+    })
+  }, [endTime]);
+
+  React.useEffect(() => {
+    setGameData({
+      ...gameData,
+      score
+    })
+  }, [score]);
+
+  React.useEffect(() => {
+    setGameData({
+      ...gameData,
+      startTime
+    })
+  }, [startTime]);
+
+  return [gameData]
+}
 
 export const Game = () => {
   const [questions, setQuestions] = React.useState([]);
@@ -77,25 +104,20 @@ export const Game = () => {
   const [answers, setAnswers] = React.useState<number[]>([]);
   const [score, setScore] = React.useState(0);
   const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY);
-  const [gameData, setGameData] = React.useState<ILeaderboardEntry>({
+  const [gameData] = useGameData({
     difficulty,
     endTime,
-    name: "",
     score,
     startTime
   })
 
   const [gameStatus, setGameStatus] = useGameStatus({
     answers,
-    difficulty,
     initialStatus: START,
     questions,
     setEndTime,
-    setGameData,
     setScore,
-    setStartTime,
-    startTime,
-
+    setStartTime
   });
 
   return (

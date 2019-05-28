@@ -1,6 +1,5 @@
 import * as React from "react"
 
-
 import {
   getLeaderboardData,
   ILeaderboardEntry,
@@ -9,7 +8,6 @@ import {
 } from "./getLeaderboardData"
 import { LeaderboardTable } from "./LeaderboardTable";
 
-
 export const LEADERBOARD_DISPLAY_LENGTH = 5
 
 interface ILeaderboardProps {
@@ -17,89 +15,87 @@ interface ILeaderboardProps {
   storageKey: string
 }
 
-interface ILeaderboardEntryWithPosition extends ILeaderboardEntry {
-  position: number
+const updateGame = (rows: ILeaderboardEntry[], newGame: ILeaderboardEntry) => {
+  const newRows = [...rows]
+  const gameIndex = findGameRow(rows, newGame)
+  newRows[gameIndex] = newGame
+  return newRows
 }
 
-export const getGameIndex = (
-  gameData: ILeaderboardEntry,
-  leaderboardData: ILeaderboardEntry[]
-) => {
-  const index = leaderboardData.findIndex((l) => l === gameData)
-  return index < 0 ? leaderboardData.length : index
-}
-
-export const getLeaderboardAtGamePosition = (gameData, leaderboardData):ILeaderboardEntryWithPosition[] => {
-  const leaderboardDataWithGameData = sortByScore([...leaderboardData, gameData])
-  const gameIndex = getGameIndex(gameData, leaderboardDataWithGameData)
-
-  let gameLeaderboardAtGamePosition
-
-  if(leaderboardDataWithGameData.length <= LEADERBOARD_DISPLAY_LENGTH){
-    gameLeaderboardAtGamePosition = addPosition(leaderboardDataWithGameData)
-  }else{
-    const idealRows = (LEADERBOARD_DISPLAY_LENGTH - 1) / 2 // ideally we have equal before and after rows to show context
-    const afterGap = leaderboardData.length - gameIndex // slots after the game index
-    const beforeGap = gameIndex // slots before the gameIndex
-    const rowsBefore = afterGap < idealRows ? idealRows + (idealRows - afterGap) : Math.min(idealRows, beforeGap) // if there isn't enough rows after then show more before
-    const rowsAfter = beforeGap < idealRows ? idealRows + (idealRows - beforeGap) : Math.min(idealRows, afterGap) // if there isnt enough before then show more after
-    const sliced = leaderboardDataWithGameData.slice(gameIndex - rowsBefore, gameIndex + rowsAfter + 1); // slice from the  rowsBefore the game data index to after the gameIndex plus rows after
-    gameLeaderboardAtGamePosition = addPosition(sliced, rowsBefore, gameIndex)
-  }
-  return gameLeaderboardAtGamePosition
-}
-
-const addPosition = (rows:ILeaderboardEntry[], gameIndex?:number, gamePosition?:number):ILeaderboardEntryWithPosition[] => {
-  return rows.map((r, i) => {
-    const position = gamePosition ?
-      gamePosition - gameIndex + i + 1 : // +1 for 1 based counting
-      i + 1
-    return {
-        ...r,
-        position
-      }
-  })
-}
-
-
-const useLeaderboardData = (storageKey, newGame: ILeaderboardEntry) => {
+const useLeaderboardData = (storageKey, newGame: ILeaderboardEntry, saveRows:boolean, setSaveRows) => {
   const createRows = (): ILeaderboardEntry[] => {
     const existing = getLeaderboardData(storageKey)
     return newGame ?
-      getLeaderboardAtGamePosition(newGame, existing) :
-      addPosition(existing.slice(0, Math.min(existing.length, LEADERBOARD_DISPLAY_LENGTH)))
+      sortByScore([...existing, newGame]) :
+      existing
   }
 
   const [rows, setRows] = React.useState<ILeaderboardEntry[]>(createRows)
 
   React.useEffect(() => {
-    setRows(createRows())
+    setRows(updateGame(rows, newGame))
   }, [newGame])
+
+  React.useEffect(() => {
+    if(saveRows){
+      updateLeaderboard(rows, storageKey)
+      setSaveRows(false)
+    }
+  }, [rows])
 
   return { rows, setRows }
 }
 
-const useEditRow = (rows: ILeaderboardEntry[], newGame?: ILeaderboardEntry) => {
-  const initialState = (): number => {
-    return newGame ? rows.findIndex(l => l.endTime === newGame.endTime) : -1
-  }
-  const [editRow, setEditRow] = React.useState<number>(initialState)
+const findGameRow = (rows: ILeaderboardEntry[], newGame: ILeaderboardEntry) => {
+  return newGame ? rows.findIndex(l => l.startTime === newGame.startTime) : null
+}
 
-  return { editRow, setEditRow }
+const getInitialPage = (rowsLength:number, editRow: number) => {
+  const optimalPadding = (LEADERBOARD_DISPLAY_LENGTH -1) / 2
+  let initialPage = 0; // default to use the start
+  if(rowsLength <= LEADERBOARD_DISPLAY_LENGTH || editRow <= optimalPadding ){
+    initialPage = 0
+  } else if(editRow + optimalPadding >= rowsLength){
+    initialPage = Math.max(0, rowsLength - LEADERBOARD_DISPLAY_LENGTH)
+  } else {
+    initialPage = editRow - optimalPadding
+  }
+  return initialPage
+}
+
+const usePage = (rows: ILeaderboardEntry[], editRow?: number) => {
+  const initialState = (): number => {
+    return editRow ?
+      getInitialPage(rows.length, editRow) :
+      0
+  }
+  const [page, setPage] = React.useState<number>(initialState)
+  return { page, setPage }
 }
 
 export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
-  const { rows, setRows } = useLeaderboardData(storageKey, newGame)
-  const { editRow, setEditRow } = useEditRow(rows, newGame)
+
+  const [ saveRows, setSaveRows] = React.useState(false)
+  const { rows, setRows } = useLeaderboardData(storageKey, newGame, saveRows, setSaveRows)
+  const gameRow = findGameRow(rows, newGame)
+  const { page, setPage } = usePage(rows, gameRow)
+
   const onResetLeaderboard = () => {
     const emptyRows: ILeaderboardEntry[] = []
-    setEditRow(-1)
-    updateLeaderboard(emptyRows, storageKey)
+    setSaveRows(true)
     setRows(emptyRows)
   }
+
+  const onRowEdit = (name) => {
+    const editedGame = {...rows[gameRow]}
+    editedGame.name = name
+    setSaveRows(true)
+    setRows(updateGame(rows, editedGame))
+  }
+
   return (
     <>
-      {rows.length > 0 && <LeaderboardTable rows={rows} editRow={editRow} storageKey={storageKey}/>}
+      {rows.length > 0 && <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page}/>}
       {rows.length > 0 && (
         <p>
           <a
@@ -110,6 +106,7 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
           </a>
         </p>
       )}
+      <p>More | less links</p>
     </>
   )
 }
