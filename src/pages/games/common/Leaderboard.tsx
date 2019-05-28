@@ -84,6 +84,7 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
     const emptyRows: ILeaderboardEntry[] = []
     setEditRow(-1)
     updateLeaderboard(emptyRows, storageKey)
+    setRows(emptyRows)
   }
   return (
     <>

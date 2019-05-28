@@ -327,4 +327,34 @@ describe("Leaderboard", () => {
     const fourthChildScore = getByTestId(leaderboardTbody.childNodes[3] as HTMLElement, "score")
     expect(fourthChildScore).toHaveTextContent(`${newGame.score}`)
   })
+
+  it("reset clears the table immediately", () => {
+    // arrange
+
+    // act
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const resetButton = getByTestId(container, "reset-leaderboard-anchor")
+    fireEvent.click(resetButton)
+
+    expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(
+      HTMLElement
+    )
+    expect(
+      queryByTestId(container, "reset-leaderboard-anchor")
+    ).not.toBeInstanceOf(HTMLElement)
+  })
+
+  it("After reset, hides  table", () => {
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(
+      HTMLElement
+    )
+  })
+
+  it("After reste, No leaderboard reset link is displayed, as no leaderboard exists", () => {
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    expect(
+      queryByTestId(container, "reset-leaderboard-anchor")
+    ).not.toBeInstanceOf(HTMLElement)
+  })
 })
