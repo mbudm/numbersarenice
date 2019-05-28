@@ -186,6 +186,10 @@ describe("Leaderboard", () => {
     // assert
     const leaderboardTbody = getByTestId(container, "leaderboard-tbody")
     expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
+    const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+    expect(firstPosition).toHaveTextContent("1")
+    const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+    expect(fifthPosition).toHaveTextContent("5")
   })
 
   it("when adding a new entry, shows adjacent entries up to max entries - middle", () => {
@@ -214,6 +218,11 @@ describe("Leaderboard", () => {
       expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
       const thirdChildScore = getByTestId(leaderboardTbody.childNodes[2] as HTMLElement, "score")
       expect(thirdChildScore).toHaveTextContent(`${newGame.score}`)
+
+      const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+      expect(firstPosition).toHaveTextContent("3")
+      const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+      expect(fifthPosition).toHaveTextContent("7")
   })
 
   it("when adding a new entry, shows adjacent entries up to max entries - top", () => {
@@ -242,6 +251,10 @@ describe("Leaderboard", () => {
     expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
     const firstChildScore = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "score")
     expect(firstChildScore).toHaveTextContent(`${newGame.score}`)
+    const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+    expect(firstPosition).toHaveTextContent("1")
+    const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+    expect(fifthPosition).toHaveTextContent("5")
   })
 
   it("when adding a new entry, shows adjacent entries up to max entries - bottom", () => {
@@ -270,6 +283,10 @@ describe("Leaderboard", () => {
     expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
     const fifthChildScore = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "score")
     expect(fifthChildScore).toHaveTextContent(`${newGame.score}`)
+    const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+    expect(firstPosition).toHaveTextContent("7")
+    const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+    expect(fifthPosition).toHaveTextContent("11")
   })
 
   it("when adding a new entry, shows adjacent entries up to max entries - 2nd top", () => {
@@ -298,6 +315,10 @@ describe("Leaderboard", () => {
     expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
     const secondChildScore = getByTestId(leaderboardTbody.childNodes[1] as HTMLElement, "score")
     expect(secondChildScore).toHaveTextContent(`${newGame.score}`)
+    const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+    expect(firstPosition).toHaveTextContent("1")
+    const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+    expect(fifthPosition).toHaveTextContent("5")
   })
 
   it("when adding a new entry, shows adjacent entries up to max entries - 2nd bottom", () => {
@@ -326,6 +347,10 @@ describe("Leaderboard", () => {
     expect(leaderboardTbody.childNodes.length).toBe(LEADERBOARD_DISPLAY_LENGTH)
     const fourthChildScore = getByTestId(leaderboardTbody.childNodes[3] as HTMLElement, "score")
     expect(fourthChildScore).toHaveTextContent(`${newGame.score}`)
+    const firstPosition = getByTestId(leaderboardTbody.childNodes[0] as HTMLElement, "position")
+    expect(firstPosition).toHaveTextContent("9")
+    const fifthPosition = getByTestId(leaderboardTbody.childNodes[4] as HTMLElement, "position")
+    expect(fifthPosition).toHaveTextContent("13")
   })
 
   it("reset clears the table immediately", () => {
