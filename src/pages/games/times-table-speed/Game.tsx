@@ -1,6 +1,7 @@
 import Card from "@material-ui/core/Card";
 import * as React from "react";
 
+import { ILeaderboardEntry } from "../common/getLeaderboardData";
 import { CompleteScreen } from "./CompleteScreen";
 import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";
@@ -28,11 +29,14 @@ export const gameDifficulty = {
 
 const useGameStatus = ({
   answers,
+  difficulty,
   initialStatus,
   questions,
   setStartTime,
   setScore,
   setEndTime,
+  setGameData,
+  startTime
 }) => {
   const [gameStatus, setGameStatus] = React.useState(initialStatus);
   const gameStatusEffects = {
@@ -40,11 +44,20 @@ const useGameStatus = ({
       setStartTime(Date.now());
     },
     [COMPLETE]: () => {
-      setEndTime(Date.now());
+      const endTime = Date.now()
+      setEndTime(endTime);
       const score = questions.filter((q, i) => {
         return (q.a * q.b) === answers[i]
       }).length / NUM_ROUNDS * 100
       setScore(score)
+      setGameData({
+        difficulty,
+        endTime,
+        name,
+        score,
+        startTime
+      })
+
     }
   }
 
@@ -64,14 +77,25 @@ export const Game = () => {
   const [answers, setAnswers] = React.useState<number[]>([]);
   const [score, setScore] = React.useState(0);
   const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY);
+  const [gameData, setGameData] = React.useState<ILeaderboardEntry>({
+    difficulty,
+    endTime,
+    name: "",
+    score,
+    startTime
+  })
 
   const [gameStatus, setGameStatus] = useGameStatus({
     answers,
+    difficulty,
     initialStatus: START,
     questions,
     setEndTime,
+    setGameData,
     setScore,
     setStartTime,
+    startTime,
+
   });
 
   return (
@@ -79,6 +103,7 @@ export const Game = () => {
       answers,
       difficulty,
       endTime,
+      gameData,
       gameRound,
       gameStatus,
       questions,

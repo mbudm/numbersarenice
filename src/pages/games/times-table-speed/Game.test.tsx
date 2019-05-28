@@ -133,6 +133,16 @@ describe("Complete Screen - first game", () => {
     expect(gameTime).toBeGreaterThan(0)
   })
 
+  it("game time is also reflected in leaderboard", () => {
+    const gameTimeEl = getByTestId(container, "game-time")
+    const leaderboard = getByTestId(container, "leaderboard")
+    const editRow = getByTestId(leaderboard, "edit-row")
+    const editRowTimeEl = getByTestId(editRow, "time")
+
+    expect(gameTimeEl.textContent).toBe(editRowTimeEl.textContent)
+  })
+
+
   it("reset button changes to start screen", () => {
     const resetButton = getByTestId(container, "reset-button")
     fireEvent.click(resetButton)

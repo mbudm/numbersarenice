@@ -152,7 +152,7 @@ const LeaderboardTable = ({ rows, editRow, storageKey }) => {
             <TableCell align="right" data-testid="score">{row.score}</TableCell>
             <TableCell align="right">
               <p>s:{row.startTime}, e:{row.endTime}</p>
-              {gameTime(row.startTime, row.endTime)}
+              <span data-testid="time">{gameTime(row.startTime, row.endTime)}</span> secs
             </TableCell>
             <TableCell align="right">{row.difficulty}</TableCell>
           </TableRow>
