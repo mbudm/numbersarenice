@@ -19,6 +19,7 @@ export const CompleteScreen = () => {
   )
   const resetGame = () => setGameStatus(START)
 
+  // this needs to go in state and update if any of the properties change - endTime for eg
   const gameData: ILeaderboardEntry = {
     difficulty,
     endTime,
@@ -29,7 +30,9 @@ export const CompleteScreen = () => {
 
   return (
     <div data-testid="complete-screen">
-      <p>Time: <span data-testid="game-time">{gameTime(startTime, endTime)}</span> seconds.  Score <span data-testid="game-score">{score}</span></p>
+      <p>
+        Time: <span data-testid="game-time">{gameTime(startTime, endTime)}</span> seconds.
+        Score <span data-testid="game-score">{score}</span>%</p>
       <Leaderboard storageKey={GAME_KEY} newGame={gameData}/>
       <table data-testid="game-summary">
         <tbody>
@@ -41,7 +44,7 @@ export const CompleteScreen = () => {
               <td>=</td>
               <td>{answers[i]}</td>
               <td>
-                {answers[i] === `${q.a * q.b}`
+                {answers[i] === q.a * q.b
                   ? "Correct"
                   : `Incorrect (${q.a * q.b})`}
               </td>

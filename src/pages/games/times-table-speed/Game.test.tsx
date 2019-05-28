@@ -120,6 +120,19 @@ describe("Complete Screen - first game", () => {
     expect(queryByTestId(container, "leaderboard")).toBeInstanceOf(HTMLElement)
   })
 
+  it("game score is a positive between 0 and 100", () => {
+    const gameScoreEl = getByTestId(container, "game-score")
+    const gameScore = parseFloat(gameScoreEl.textContent)
+    expect(gameScore).toBeGreaterThanOrEqual(0)
+    expect(gameScore).toBeLessThanOrEqual(100)
+  })
+
+  it("game time is a positive number of seconds", () => {
+    const gameTimeEl = getByTestId(container, "game-time")
+    const gameTime = parseFloat(gameTimeEl.textContent)
+    expect(gameTime).toBeGreaterThan(0)
+  })
+
   it("reset button changes to start screen", () => {
     const resetButton = getByTestId(container, "reset-button")
     fireEvent.click(resetButton)

@@ -43,7 +43,7 @@ const useGameStatus = ({
       setEndTime(Date.now());
       const score = questions.filter((q, i) => {
         return (q.a * q.b) === answers[i]
-      }).length / NUM_ROUNDS
+      }).length / NUM_ROUNDS * 100
       setScore(score)
     }
   }
