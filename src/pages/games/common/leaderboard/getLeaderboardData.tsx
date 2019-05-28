@@ -1,4 +1,4 @@
-import { hasLocalStorage } from "./hasStorage";
+import { hasLocalStorage } from "../hasStorage";
 
 
 export interface ILeaderboardEntry {

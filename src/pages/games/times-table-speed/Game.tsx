@@ -1,7 +1,7 @@
 import Card from "@material-ui/core/Card";
 import * as React from "react";
 
-import { ILeaderboardEntry } from "../common/getLeaderboardData";
+import { ILeaderboardEntry } from "../common/leaderboard/getLeaderboardData";
 import { CompleteScreen } from "./CompleteScreen";
 import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";

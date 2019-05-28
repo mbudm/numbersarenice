@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Leaderboard } from "../common/Leaderboard"
+import { Leaderboard } from "../common/leaderboard/Leaderboard"
 import { GAME_KEY, GameContext, NUM_ROUNDS, PLAY} from "./Game"
 
 const generateQuestions = () =>
