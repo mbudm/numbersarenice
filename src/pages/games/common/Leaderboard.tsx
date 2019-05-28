@@ -52,14 +52,18 @@ export const getLeaderboardAtGamePosition = (gameData, leaderboardData) => {
 
 
 const useLeaderboardData = (storageKey, newGame: ILeaderboardEntry) => {
-  const initialState = (): ILeaderboardEntry[] => {
+  const createRows = (): ILeaderboardEntry[] => {
     const existing = getLeaderboardData(storageKey)
     return newGame ?
       getLeaderboardAtGamePosition(newGame, existing) :
       existing.slice(0, Math.min(existing.length, LEADERBOARD_DISPLAY_LENGTH))
   }
 
-  const [rows, setRows] = React.useState<ILeaderboardEntry[]>(initialState)
+  const [rows, setRows] = React.useState<ILeaderboardEntry[]>(createRows)
+
+  React.useEffect(() => {
+    setRows(createRows())
+  }, [newGame])
 
   return { rows, setRows }
 }
