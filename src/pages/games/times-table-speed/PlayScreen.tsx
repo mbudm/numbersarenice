@@ -26,6 +26,7 @@ export const PlayScreen = () => {
     inputEl.current.focus()
     setSubmitDisabled(true)
     dispatch({ type: actions.SUBMIT_ANSWER, payload: answer})
+    setAnswer("")
   }
 
   const handleChange = event => {

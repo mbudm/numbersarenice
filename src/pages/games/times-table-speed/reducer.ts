@@ -53,18 +53,23 @@ const handlers = {
     let newRound = state.round
     let newStatus =  state.status
     let newEndTime = state.gameData.endTime
+    let newScore = state.gameData.score
     if (newAnswers.length < NUM_ROUNDS) {
       newRound = state.round + 1
     } else {
       newStatus = COMPLETE
       newEndTime = Date.now()
+      newScore = state.questions.filter((q, i) => {
+        return (q.a * q.b) === newAnswers[i]
+      }).length / NUM_ROUNDS * 100
     }
     return {
       ...state,
       answers: newAnswers,
       gameData: {
         ...state.gameData,
-        endTime: newEndTime
+        endTime: newEndTime,
+        score: newScore
       },
       round: newRound,
       status: newStatus
