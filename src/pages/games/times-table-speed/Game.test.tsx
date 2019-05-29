@@ -7,7 +7,8 @@ import {
   queryByTestId,
   render,
 } from "react-testing-library"
-import { Game, NUM_ROUNDS } from "./Game"
+import { NUM_ROUNDS } from "./constants";
+import { Game } from "./Game"
 
 const startGame = container => {
   const startButton = getByTestId(container, "start-button")

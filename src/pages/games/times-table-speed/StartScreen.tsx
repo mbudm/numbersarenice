@@ -1,25 +1,18 @@
 import * as React from "react";
 
 import { Leaderboard } from "../common/leaderboard/Leaderboard"
-import { GAME_KEY, GameContext, NUM_ROUNDS, PLAY} from "./Game"
+import { GAME_KEY } from "./constants";
+import { GameContext} from "./Game"
+import { actions } from "./reducer";
 
-const generateQuestions = () =>
-  Array.from({ length: NUM_ROUNDS }).map(() => ({
-    // tslint:disable-next-line:insecure-random
-    a: Math.ceil(Math.random() * 12),
-    // tslint:disable-next-line:insecure-random
-    b: Math.ceil(Math.random() * 12),
-  }))
+
 
 export const StartScreen = () => {
-  const { setAnswers, setGameRound, setGameStatus, setQuestions } = React.useContext(
+  const { dispatch } = React.useContext(
     GameContext
   )
   const startGame = () => {
-    setAnswers([])
-    setGameRound(0)
-    setQuestions(generateQuestions())
-    setGameStatus(PLAY)
+    dispatch({type: actions.START_GAME})
   }
 
   return (

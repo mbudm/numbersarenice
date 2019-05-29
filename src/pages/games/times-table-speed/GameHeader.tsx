@@ -3,7 +3,7 @@ import * as React from "react";
 import { GameContext } from "./Game";
 
 export const GameHeader = () => {
-  const { answers, endTime, gameRound, gameStatus, startTime } = React.useContext(GameContext);
+  const { state } = React.useContext(GameContext);
   return (<>
     <h1 style={{
       marginBottom: 30,
@@ -16,15 +16,15 @@ export const GameHeader = () => {
         </h1>
     <dl>
       <dt>gameStatus</dt>
-      <dd>{gameStatus}</dd>
+      <dd>{state.status}</dd>
       <dt>gameRound</dt>
-      <dd>{gameRound}</dd>
+      <dd>{state.round}</dd>
       <dt>startTime</dt>
-      <dd>{startTime}</dd>
+      <dd>{state.gameData.startTime}</dd>
       <dt>endTime</dt>
-      <dd>{endTime}</dd>
+      <dd>{state.gameData.endTime}</dd>
       <dt>answers</dt>
-      <dd>{answers.length}</dd>
+      <dd>{state.answers.length}</dd>
     </dl>
   </>);
 };

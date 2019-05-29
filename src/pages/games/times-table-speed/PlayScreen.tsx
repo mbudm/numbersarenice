@@ -1,5 +1,6 @@
 import * as React from "react"
-import { COMPLETE, GameContext, NUM_ROUNDS } from "./Game"
+import { GameContext } from "./Game"
+import { actions } from "./reducer";
 
 
 interface IQuestion {
@@ -7,43 +8,24 @@ interface IQuestion {
   b: number
 }
 
-interface IPlayScreenContext {
-  questions: IQuestion[]
-  answers: number[]
-  gameRound: number
-  setAnswers: (answers: number[]) => void
-  setGameRound: (gameRound:number) => void
-  setGameStatus: (gameStatus:string) => void
-}
 export const PlayScreen = () => {
   const {
-    questions,
-    answers,
-    gameRound,
-    setAnswers,
-    setGameRound,
-    setGameStatus,
-  }: IPlayScreenContext = React.useContext(GameContext)
+    dispatch,
+    state
+  } = React.useContext(GameContext)
 
   const [submitDisabled, setSubmitDisabled] = React.useState(true)
+  const [answer, setAnswer] = React.useState('')
 
   const inputEl = React.useRef(null)
   const submitEl = React.useRef(null)
 
-  const answer = answers[gameRound] || ""
-  const question = questions[gameRound]
+  const question = state.questions[state.round]
 
   const handleSubmit = () => {
-    if (answers.length <= gameRound) {
-      return
-    }
-    if (answers.length < NUM_ROUNDS) {
-      inputEl.current.focus()
-      setSubmitDisabled(true)
-      setGameRound(gameRound + 1)
-    } else {
-      setGameStatus(COMPLETE)
-    }
+    inputEl.current.focus()
+    setSubmitDisabled(true)
+    dispatch({ type: actions.SUBMIT_ANSWER, payload: answer})
   }
 
   const handleChange = event => {
@@ -52,14 +34,7 @@ export const PlayScreen = () => {
       return
     }
     setSubmitDisabled(false)
-
-    const newAnswers:number[] = [...answers]
-    if (gameRound === newAnswers.length) {
-      newAnswers.push(event.target.value * 1)
-    } else {
-      newAnswers[gameRound] = event.target.value * 1
-    }
-    setAnswers(newAnswers)
+    setAnswer(event.target.value)
   }
   const handleKeyUp = event => {
     if (event.key === "Enter") {
