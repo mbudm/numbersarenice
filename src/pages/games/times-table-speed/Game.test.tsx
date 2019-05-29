@@ -138,11 +138,8 @@ describe("Complete Screen - first game", () => {
     const leaderboard = getByTestId(container, "leaderboard")
     const editRow = getByTestId(leaderboard, "edit-row")
     const editRowTimeEl = getByTestId(editRow, "time")
-    // fuzzy match as slight delay in rendering means sometimes
-    // the child component doesn't have the update in time for this test
-    // so have added a hacky fix in gameTime to take current timestamp
-    // basically the time for the game comes in at ~ 0.01 vs 0.02
-    expect(parseFloat(gameTimeEl.textContent)).toBeCloseTo(parseFloat(editRowTimeEl.textContent), 1)
+
+    expect(gameTimeEl.textContent).toBe(editRowTimeEl.textContent)
   })
 
 
