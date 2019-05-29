@@ -1,5 +1,5 @@
 import * as React from "react"
-import { GameContext, NUM_ROUNDS, SCORING } from "./Game"
+import { COMPLETE, GameContext, NUM_ROUNDS } from "./Game"
 
 
 interface IQuestion {
@@ -42,7 +42,7 @@ export const PlayScreen = () => {
       setSubmitDisabled(true)
       setGameRound(gameRound + 1)
     } else {
-      setGameStatus(SCORING)
+      setGameStatus(COMPLETE)
     }
   }
 

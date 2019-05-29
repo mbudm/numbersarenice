@@ -5,14 +5,12 @@ import { ILeaderboardEntry } from "../common/leaderboard/getLeaderboardData";
 import { CompleteScreen } from "./CompleteScreen";
 import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";
-import { ScoringScreen } from "./ScoringScreen";
 import { StartScreen } from "./StartScreen";
 
 export const GameContext = React.createContext(null);
 
 export const START = "START"
 export const PLAY = "PLAY"
-export const SCORING = "SCORING"
 export const COMPLETE = "COMPLETE"
 export const NUM_ROUNDS = 2
 export const GAME_KEY = "nn_tt_speed" // for localstorage
@@ -20,7 +18,6 @@ export const GAME_KEY = "nn_tt_speed" // for localstorage
 const gameScreens = {
   [START]: (<StartScreen />),
   [PLAY]: (<PlayScreen />),
-  [SCORING]: (<ScoringScreen />),
   [COMPLETE]: (<CompleteScreen />)
 };
 
@@ -41,18 +38,15 @@ const useGameStatus = ({
   const [gameStatus, setGameStatus] = React.useState(initialStatus);
   const gameStatusEffects = {
     [PLAY]: () => {
-      const now = Date.now()
-      setStartTime(now);
+      setStartTime(Date.now());
     },
-    [SCORING]: () => {
-      const now = Date.now()
-      setEndTime(now);
+    [COMPLETE]: () => {
+      setEndTime(Date.now());
       const score = questions.filter((q, i) => {
         return (q.a * q.b) === answers[i]
       }).length / NUM_ROUNDS * 100
       setScore(score)
-      setGameStatus(COMPLETE)
-    },
+    }
   }
 
   React.useEffect(() => {
@@ -110,7 +104,6 @@ export const Game = () => {
   const [answers, setAnswers] = React.useState<number[]>([]);
   const [score, setScore] = React.useState(0);
   const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY);
-
   const [gameData] = useGameData({
     difficulty,
     endTime,
@@ -126,7 +119,6 @@ export const Game = () => {
     setScore,
     setStartTime
   });
-
 
   return (
     <GameContext.Provider value={{
