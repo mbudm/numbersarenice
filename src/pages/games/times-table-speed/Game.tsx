@@ -38,10 +38,12 @@ const useGameStatus = ({
   const [gameStatus, setGameStatus] = React.useState(initialStatus);
   const gameStatusEffects = {
     [PLAY]: () => {
-      setStartTime(Date.now());
+      const now = Date.now()
+      setStartTime(now);
     },
     [COMPLETE]: () => {
-      setEndTime(Date.now());
+      const now = Date.now()
+      setEndTime(now);
       const score = questions.filter((q, i) => {
         return (q.a * q.b) === answers[i]
       }).length / NUM_ROUNDS * 100
@@ -57,58 +59,92 @@ const useGameStatus = ({
   return [gameStatus, setGameStatus];
 }
 
-const useGameData = ({
-    difficulty,
-    endTime,
-    score,
-    startTime
+const useScore = ({
+    gameData,
+    setGameData
 }) => {
-
-  const [gameData, setGameData] = React.useState<ILeaderboardEntry>({
-    difficulty,
-    endTime,
-    name: "",
-    score,
-    startTime
-  })
-
-  React.useEffect(() => {
-    setGameData({
-      ...gameData,
-      endTime
-    })
-  }, [endTime]);
-
+  const [score, setScore] = React.useState(0)
   React.useEffect(() => {
     setGameData({
       ...gameData,
       score
     })
   }, [score]);
+  return [score, setScore]
+}
 
-  React.useEffect(() => {
-    setGameData({
-      ...gameData,
-      startTime
-    })
-  }, [startTime]);
+const useStartTime = ({
+  gameData,
+  setGameData
+}) => {
+const [startTime, setStartTime] = React.useState(0)
+React.useEffect(() => {
+  setGameData({
+    ...gameData,
+    startTime
+  })
+}, [startTime]);
+return [startTime, setStartTime]
+}
 
-  return [gameData]
+const useEndTime = ({
+  gameData,
+  setGameData
+}) => {
+const [endTime, setEndTime] = React.useState(0)
+React.useEffect(() => {
+  setGameData({
+    ...gameData,
+    endTime
+  })
+}, [endTime]);
+return [endTime, setEndTime]
+}
+
+const useDifficulty = ({
+  gameData,
+  setGameData
+}) => {
+const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY)
+React.useEffect(() => {
+  setGameData({
+    ...gameData,
+    difficulty
+  })
+}, [difficulty]);
+return [difficulty, setDifficulty]
 }
 
 export const Game = () => {
   const [questions, setQuestions] = React.useState([]);
-  const [startTime, setStartTime] = React.useState(0);
-  const [endTime, setEndTime] = React.useState(0);
   const [gameRound, setGameRound] = React.useState(0);
   const [answers, setAnswers] = React.useState<number[]>([]);
-  const [score, setScore] = React.useState(0);
-  const [difficulty, setDifficulty] = React.useState(gameDifficulty.EASY);
-  const [gameData] = useGameData({
-    difficulty,
-    endTime,
-    score,
-    startTime
+  const [gameData, setGameData] = React.useState<ILeaderboardEntry>({
+    difficulty: '',
+    endTime: 0,
+    name: "",
+    score: 0,
+    startTime: 0
+  })
+
+  const [startTime, setStartTime] = useStartTime({
+    gameData,
+    setGameData
+  });
+
+  const [endTime, setEndTime] = useEndTime({
+    gameData,
+    setGameData
+  });
+
+  const [score, setScore] = useScore({
+    gameData,
+    setGameData
+  });
+
+  const [difficulty, setDifficulty] = useDifficulty({
+    gameData,
+    setGameData
   })
 
   const [gameStatus, setGameStatus] = useGameStatus({

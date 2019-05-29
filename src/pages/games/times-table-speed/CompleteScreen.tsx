@@ -14,10 +14,10 @@ export const CompleteScreen = () => {
     GameContext
   )
   const resetGame = () => setGameStatus(START)
-
   return (
     <div data-testid="complete-screen">
       <p>
+        Started at: {gameData.startTime} finished at {gameData.endTime}.<br />
         Time: <span data-testid="game-time">{gameTime(gameData.startTime, gameData.endTime)}</span> seconds.
         Score <span data-testid="game-score">{gameData.score}</span>%</p>
       <Leaderboard storageKey={GAME_KEY} newGame={gameData}/>
