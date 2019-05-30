@@ -10,19 +10,18 @@ module.exports = {
     // for a list of supported networks take a look at https://jaketrent.github.io/react-social-icons/
     networks: [],
     about:
-      `<p>Why do posters for kids have to be badly designed 
-    with clunky fonts and cartoonish typography?</p> 
-    <p>It's time to give our kids the quality they deserve 
+      `<p>Why do posters for kids have to be badly designed
+    with clunky fonts and cartoonish typography?</p>
+    <p>It's time to give our kids the quality they deserve
     with math posters that are clear and easy to follow.</p>
     <p>Our products are well designed using a neat alignment and judicious typography
     with key information in big type
     so that the important things are retained more easily</p>
-    <p>Any questions or feedback? Contact us through our 
+    <p>Any questions or feedback? Contact us through our
     <a href="https://www.redbubble.com/people/numbersarenice" >RedBubble profile page</a></p>
     `,
   },
   plugins: [
-    `gatsby-plugin-tslint`,
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-source-filesystem`,

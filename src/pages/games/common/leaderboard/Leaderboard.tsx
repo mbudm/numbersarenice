@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { Button } from "@material-ui/core";
 import {
   getLeaderboardData,
   ILeaderboardEntry,
@@ -98,12 +99,10 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
       {rows.length > 0 && <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page}/>}
       {rows.length > 0 && (
         <p>
-          <a
+          <Button
             onClick={onResetLeaderboard}
             data-testid="reset-leaderboard-anchor"
-          >
-            Reset leaderboard
-          </a>
+            >Clear</Button>
         </p>
       )}
       <p>More | less links</p>

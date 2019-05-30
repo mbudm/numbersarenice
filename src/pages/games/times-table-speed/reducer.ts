@@ -1,7 +1,16 @@
-import { ILeaderboardEntry } from "../common/leaderboard/getLeaderboardData";
-import { COMPLETE, gameDifficulty, NUM_ROUNDS, PLAY, START } from "./constants";
+import { ILeaderboardEntry } from "../common/leaderboard/getLeaderboardData"
+import {
+  COMPLETE,
+  GAME_DIFFICULTY_INIT,
+  gameDifficulty,
+  NUM_ROUNDS_INIT,
+  PLAY,
+  START,
+} from "./constants"
 
 export const actions = {
+  CHANGE_DIFFICULTY: "CHANGE_DIFFICULTY",
+  CHANGE_ROUNDS: "CHANGE_ROUNDS",
   COMPLETE_GAME: "COMPLETE",
   RESET_GAME: "RESET_GAME",
   SAVE_NAME: "SAVE_NAME",
@@ -10,58 +19,61 @@ export const actions = {
 }
 
 const handlers = {
-  [actions.RESET_GAME]: (state) => ({
+  [actions.RESET_GAME]: state => ({
     ...state,
     answers: [],
     gameData: {
       ...state.gameData,
       endTime: 0,
       score: 0,
-      startTime: 0
+      startTime: 0,
     },
     questions: [],
     round: 0,
-    status: START
+    status: START,
   }),
   [actions.SAVE_NAME]: (state, action) => ({
     ...state,
     gameData: {
       ...state.gameData,
-      name: action.payload
-    }
+      name: action.payload,
+    },
   }),
-  [actions.START_GAME]: (state) => {
+  [actions.START_GAME]: state => {
     const newStartTime = Date.now()
     const newStatus = PLAY
     return {
       ...state,
       gameData: {
         ...state.gameData,
-        startTime: newStartTime
+        startTime: newStartTime,
       },
-      questions: generateQuestions(),
-      status: newStatus
+      questions: generateQuestions(state.rounds),
+      status: newStatus,
     }
   },
   [actions.SUBMIT_ANSWER]: (state, action) => {
-    const newAnswers:number[] = [...state.answers]
+    const newAnswers: number[] = [...state.answers]
     if (state.round === newAnswers.length) {
       newAnswers.push(action.payload * 1)
     } else {
       newAnswers[state.round] = action.payload * 1
     }
     let newRound = state.round
-    let newStatus =  state.status
+    let newStatus = state.status
     let newEndTime = state.gameData.endTime
     let newScore = state.gameData.score
-    if (newAnswers.length < NUM_ROUNDS) {
+    if (newAnswers.length < state.rounds) {
       newRound = state.round + 1
     } else {
       newStatus = COMPLETE
       newEndTime = Date.now()
-      newScore = state.questions.filter((q, i) => {
-        return (q.a * q.b) === newAnswers[i]
-      }).length / NUM_ROUNDS * 100
+      newScore =
+        (state.questions.filter((q, i) => {
+          return q.a * q.b === newAnswers[i]
+        }).length /
+          state.rounds) *
+        100
     }
     return {
       ...state,
@@ -69,19 +81,36 @@ const handlers = {
       gameData: {
         ...state.gameData,
         endTime: newEndTime,
-        score: newScore
+        score: newScore,
       },
       round: newRound,
-      status: newStatus
+      status: newStatus,
     }
   },
+  [actions.CHANGE_DIFFICULTY]: (state, action) => {
+    const newDifficulty: number = action.payload * 1
+    return {
+      ...state,
+      difficulty: newDifficulty,
+      gameData: {
+        ...state.gameData,
+        difficulty: gameDifficulty[newDifficulty].label,
+      },
+    }
+  },
+  [actions.CHANGE_ROUNDS]: (state, action) => {
+    return {
+      ...state,
+      rounds: action.payload * 1
+    }
+  }
 }
 
 export function reducer(state, action) {
-  if(handlers[action.type] instanceof Function){
+  if (handlers[action.type] instanceof Function) {
     return handlers[action.type](state, action)
   } else {
-    throw new Error(`No handler for ${action.type} action`);
+    throw new Error(`No handler for ${action.type} action`)
   }
 }
 
@@ -91,29 +120,33 @@ export interface ITimesTableQuestion {
 }
 
 export interface ITimesTableSpeedState {
-  status: string
+  answers: number[]
+  difficulty: number
   gameData: ILeaderboardEntry
   questions: ITimesTableQuestion[]
-  answers: number[]
-  round: 0
+  round: number
+  rounds: number
+  status: string
 }
 
 export const initialState: ITimesTableSpeedState = {
   answers: [],
+  difficulty: GAME_DIFFICULTY_INIT,
   gameData: {
-    difficulty: gameDifficulty.EASY,
+    difficulty: gameDifficulty[GAME_DIFFICULTY_INIT].label,
     endTime: 0,
     name: "",
     score: 0,
-    startTime: 0
+    startTime: 0,
   },
   questions: [],
   round: 0,
+  rounds: NUM_ROUNDS_INIT,
   status: START,
 }
 
-const generateQuestions = () =>
-  Array.from({ length: NUM_ROUNDS }).map(() => ({
+const generateQuestions = rounds =>
+  Array.from({ length: rounds }).map(() => ({
     // tslint:disable-next-line:insecure-random
     a: Math.ceil(Math.random() * 12),
     // tslint:disable-next-line:insecure-random

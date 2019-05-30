@@ -23,6 +23,8 @@
     "no-implicit-dependencies": [true, "dev"]
   },
   "linterOptions": {
-    "exclude": ["./node-moudles/**/*.ts"]
+    "exclude": [
+      "./node-moudles/**/*.ts"
+    ]
   }
 }
