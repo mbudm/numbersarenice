@@ -3,6 +3,7 @@ import * as React from "react"
 import Responsive from "react-responsive"
 
 import THEME from "../../theme"
+import GamesButton from "../games/games-button"
 import AboutButton from "../me/about-button"
 import Author from "../me/author"
 import CallToActionButton from "../me/calltoaction-button"
@@ -45,6 +46,7 @@ const HeaderArea = ({ data, styles }: IHeaderArea) => (
     }}
   >
     <AboutButton />
+    <GamesButton />
     <div
       style={{
         paddingBottom: styles.paddingBottom,

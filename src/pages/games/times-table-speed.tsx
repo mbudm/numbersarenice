@@ -1,9 +1,9 @@
 import * as React from "react"
 import Responsive from "react-responsive"
 
+import { Game } from "../../components/games/times-table-speed/Game";
 import FabButton from "../../components/shared/FabButton"
 import THEME from "../../theme"
-import { Game } from "./times-table-speed/Game";
 
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 const Default = props => <Responsive {...props} minWidth={768} />

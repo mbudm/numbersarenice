@@ -20,6 +20,13 @@ module.exports = {
     <p>Any questions or feedback? Contact us through our
     <a href="https://www.redbubble.com/people/numbersarenice" >RedBubble profile page</a></p>
     `,
+    games:
+      `<p>Posters are great for soaking up Math knowledge as you stroll
+      past but sometimes you need to get more active in your learning,
+      that's where games can help.</p>
+      <p>We're adding simple and fun games to the numbers are nice
+      collection - check them out and challenge yourself.</p>
+    `,
   },
   plugins: [
     `gatsby-plugin-typescript`,

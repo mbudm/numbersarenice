@@ -107,7 +107,7 @@ export const PlayScreen = () => {
         size="large"
         fullWidth={true}
       >
-        Submit
+        Answer
       </Button>
     </div>
   )
