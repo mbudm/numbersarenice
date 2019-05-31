@@ -7,7 +7,7 @@ import {
   queryByTestId,
   render,
 } from "react-testing-library"
-import { NUM_ROUNDS } from "./constants";
+import { NUM_ROUNDS_INIT } from "./constants";
 import { Game } from "./Game"
 
 const startGame = container => {
@@ -16,7 +16,7 @@ const startGame = container => {
 }
 
 const answerAll = (answerInput, answerSubmit) => {
-  for (let i = 0; i < NUM_ROUNDS; i++) {
+  for (let i = 0; i < NUM_ROUNDS_INIT; i++) {
     fireEvent.change(answerInput, { target: { value: i } })
     fireEvent.click(answerSubmit)
   }

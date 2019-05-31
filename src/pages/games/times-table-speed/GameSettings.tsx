@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: "center",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),

@@ -23,8 +23,8 @@ export const LeaderboardTable = ({ onRowEdit, rows, gameRow, page }) => {
   return (<Table data-testid="leaderboard">
     <TableHead>
       <TableRow>
-        <TableCell />
-        <TableCell align="right">Name</TableCell>
+        <TableCell align="right">Rank</TableCell>
+        <TableCell align="left">Name</TableCell>
         <TableCell align="right">Score</TableCell>
         <TableCell align="right">Time</TableCell>
         <TableCell align="right">Difficulty</TableCell>

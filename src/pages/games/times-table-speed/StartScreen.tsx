@@ -27,16 +27,18 @@ export const StartScreen = () => {
         and number of rounds to learn your multiplication tables and have fun.
       </p>
       <GameSettings />
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        fullWidth={true}
-        onClick={startGame}
-        data-testid="start-button"
-      >
-        Play New Game
-      </Button>
+      <p>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth={true}
+          onClick={startGame}
+          data-testid="start-button"
+        >
+          Play New Game
+        </Button>
+      </p>
       <Leaderboard storageKey={GAME_KEY} />
     </div>
   )

@@ -62,10 +62,13 @@ const THEME = {
       background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #726030, #b5a067)",
     },
     layout: {
-      backgroundColor: "#eeeeee",
+      backgroundColor: "#eeeedd",
       cardSectionMaxWidth: 800,
     },
   },
+  leaderBoard: {
+    backgroundColor: "#eee",
+  }
 }
 
 export default THEME

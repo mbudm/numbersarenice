@@ -1,6 +1,12 @@
 import * as React from "react"
 
-import { Button } from "@material-ui/core";
+import { makeStyles, Toolbar, Typography } from "@material-ui/core";
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForever from '@material-ui/icons/DeleteForever';
+
+
+import THEME from "../../../../theme";
 import {
   getLeaderboardData,
   ILeaderboardEntry,
@@ -10,6 +16,21 @@ import {
 import { LeaderboardTable } from "./LeaderboardTable";
 
 export const LEADERBOARD_DISPLAY_LENGTH = 5
+
+const useStyles = makeStyles(() => ({
+  headingText: {
+    flexGrow: 1,
+  },
+  root: {
+    background: THEME.leaderBoard.backgroundColor,
+    padding: 10
+  },
+  toolBar: {
+    borderBottom: "1px solid #ccc",
+    flexGrow: 1,
+    padding: 10
+  },
+}))
 
 interface ILeaderboardProps {
   newGame?: ILeaderboardEntry
@@ -76,6 +97,8 @@ const usePage = (rows: ILeaderboardEntry[], editRow?: number) => {
 
 export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
 
+  const classes = useStyles()
+
   const [ saveRows, setSaveRows] = React.useState(false)
   const { rows, setRows } = useLeaderboardData(storageKey, newGame, saveRows, setSaveRows)
   const gameRow = findGameRow(rows, newGame)
@@ -94,20 +117,21 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
     setRows(updateGame(rows, editedGame))
   }
 
-  return (
-    <>
-      {rows.length > 0 && <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page}/>}
-      {rows.length > 0 && (
-        <p>
-          <Button
-            onClick={onResetLeaderboard}
-            data-testid="reset-leaderboard-anchor"
-            >Clear</Button>
-        </p>
-      )}
-      <p>More | less links</p>
-    </>
-  )
+  return rows.length > 0 ? (
+    <Box className={classes.root}>
+      <Toolbar className={classes.toolBar}>
+        <Typography variant="h6" className={classes.headingText}>Top scores</Typography>
+        <IconButton
+          onClick={onResetLeaderboard}
+          data-testid="reset-leaderboard-anchor"
+          aria-label="Delete the leaderboard"
+          >
+          <DeleteForever />
+        </IconButton>
+      </Toolbar>
+      <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page}/>
+    </Box>
+  ): null
 }
 
 
