@@ -12,8 +12,7 @@ export default () => (
           backgroundColor: THEME.index.aboutButton.backgroundColor,
           borderColor: THEME.index.aboutButton.borderColor,
           color: THEME.index.aboutButton.color,
-          marginRight: 30,
-          marginTop: 30,
+          marginRight: 20,
           textTransform: "none",
           width: THEME.index.aboutButton.width,
         }}

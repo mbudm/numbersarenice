@@ -1,6 +1,7 @@
 import Card from "@material-ui/core/Card";
 import * as React from "react";
 
+import { CardContent } from "@material-ui/core";
 import { CompleteScreen } from "./CompleteScreen";
 import { COMPLETE, PLAY, START } from "./constants";
 import { GameHeader } from "./GameHeader";
@@ -24,9 +25,11 @@ export const Game = () => {
       dispatch,
       state,
     }}>
-      <Card style={{ padding: 50 }}>
-        <GameHeader />
-        {gameScreens[state.status]}
+      <Card>
+        <CardContent>
+          <GameHeader />
+          {gameScreens[state.status]}
+        </CardContent>
       </Card>
     </GameContext.Provider>
   );

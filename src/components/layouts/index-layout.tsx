@@ -45,8 +45,15 @@ const HeaderArea = ({ data, styles }: IHeaderArea) => (
       background: THEME.index.header.background,
     }}
   >
-    <AboutButton />
-    <GamesButton />
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: "flex-end",
+      padding: 20
+    }}>
+      <AboutButton />
+      <GamesButton />
+    </div>
     <div
       style={{
         paddingBottom: styles.paddingBottom,

@@ -13,7 +13,7 @@ import {
   sortByScore,
   updateLeaderboard,
 } from "./getLeaderboardData"
-import { LeaderboardTable } from "./LeaderboardTable";
+import {LeaderboardTable} from "./LeaderboardTable";
 
 export const LEADERBOARD_DISPLAY_LENGTH = 5
 

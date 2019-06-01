@@ -24,16 +24,19 @@ const useStyles = makeStyles(() => ({
   },
   argument: {
     fontSize: 64,
+    lineHeight:1.5,
     textAlign: "center",
     width: "1em",
   },
   operator: {
     color: "#999",
     fontSize: 36,
+    lineHeight:3,
     textAlign: "center",
     width: "1em",
   },
   questionBox: {
+    alignContent: "space-between",
     alignItems: "center",
     display: 'flex',
     flexWrap: 'wrap',
