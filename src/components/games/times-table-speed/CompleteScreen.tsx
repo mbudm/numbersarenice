@@ -61,10 +61,10 @@ export const CompleteScreen = () => {
   */
 
   const feedback = state.gameData.score >= 80 ?
-    (<p>Math genius alert! Well done.</p>) :
+    (<Feedback.Great />) :
     (state.gameData.score >= 60 ?
-      (<p>Good work, but do you think you can beat your score? Why not have another go?</p>) :
-      (<p>Not the best score ever. Maybe one of <Link to={`/`} style={{ textDecoration: "none" }}>our posters</Link> on your wall might help you practice?</p>)
+      (<Feedback.Ok />) :
+      (<Feedback.Bad />)
     )
   return (
     <div data-testid="complete-screen">
@@ -100,7 +100,7 @@ export const CompleteScreen = () => {
       <div className={classes.feedback}>
         {feedback}
       </div>
-      <Button onClick={handleDetails}>{showDetails ? "Hide" : "View" } game details</Button>
+      <Button onClick={handleDetails} data-testid="game-summary-toggle" >{showDetails ? "Hide" : "View" } game details</Button>
       {showDetails && <GameDetails />}
       <Leaderboard storageKey={GAME_KEY} newGame={state.gameData}/>
     </div>
@@ -134,4 +134,11 @@ const GameDetails = () => {
       </tbody>
     </table>
   )
+}
+
+
+const Feedback = {
+  Bad: () => (<p>Not the best score ever. Maybe one of  on your wall might help you practice?</p>),
+  Great: () => (<p>Math genius alert! Well done.</p>),
+  Ok: () => (<p>Good work, but do you think you can beat your score? Why not have another go?</p>),
 }

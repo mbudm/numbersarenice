@@ -114,7 +114,7 @@ describe("Complete Screen - first game", () => {
     )
     expect(queryByTestId(container, "game-time")).toBeInstanceOf(HTMLElement)
     expect(queryByTestId(container, "game-score")).toBeInstanceOf(HTMLElement)
-    expect(queryByTestId(container, "game-summary")).toBeInstanceOf(HTMLElement)
+    expect(queryByTestId(container, "game-summary-toggle")).toBeInstanceOf(HTMLElement)
     expect(queryByTestId(container, "reset-button")).toBeInstanceOf(HTMLElement)
     expect(queryByTestId(container, "leaderboard")).toBeInstanceOf(HTMLElement)
   })

@@ -18,19 +18,21 @@ const Default = props => <Responsive {...props} minWidth={768} />
 
 const validEditRow = (row: number, rows: ILeaderboardEntry[]) => Number.isInteger(row) && row < rows.length;
 
-export const LeaderboardTable = (props) => (
-  <>
-    <p>should see a table {props.values.width}</p>
-    <Default values={props.values}>
-      <p>should see table default</p>
-      <TableSpacious {...props} />
-    </Default>
-    <Mobile values={props.values}>
-      <p>should see table mobile</p>
-      <TableCondensed {...props} />
-    </Mobile>
-  </>
-)
+export const LeaderboardTable = (props) => {
+  const values = props.values && props.values.width ?
+    props.values :
+    { width:800 }
+  return (
+    <>
+      <Default values={values}>
+        <TableSpacious {...props} />
+      </Default>
+      <Mobile values={values}>
+        <TableCondensed {...props} />
+      </Mobile>
+    </>
+  )
+}
 
 
 export const TableSpacious = ({ onRowEdit, rows, gameRow, page }) => {
