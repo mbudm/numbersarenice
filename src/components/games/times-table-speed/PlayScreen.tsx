@@ -49,7 +49,7 @@ const useStyles = makeStyles(() => ({
 export const PlayScreen = () => {
   const { dispatch, state } = React.useContext(GameContext)
 
-  const classes = useStyles()
+  const classes = useStyles({})
 
   const [submitDisabled, setSubmitDisabled] = React.useState(true)
   const [answer, setAnswer] = React.useState("")

@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const EditName = ({ onEdit }) => {
-  const classes = useStyles()
+  const classes = useStyles({})
   const [name, setName] = React.useState("");
   const onChange = e => setName(e.target.value);
   const onSubmit = e => onEdit(name);

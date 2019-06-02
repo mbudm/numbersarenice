@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 export const GameSettings = () => {
   const { dispatch, state } = React.useContext(GameContext);
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const difficultyLabel = React.useRef(null);
   const [difficultyLabelWidth, setDifficultyLabelWidth] = React.useState(0);
@@ -42,21 +42,21 @@ export const GameSettings = () => {
   const changeRounds = (e) => dispatch({ type: actions.CHANGE_ROUNDS, payload: e.target.value });
   return (<form className={classes.root}>
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel ref={difficultyLabel} htmlFor="outlined-difficulty-native-simple">
+      <InputLabel ref={difficultyLabel} htmlFor="select-difficulty">
         Difficulty
         </InputLabel>
-      <Select native value={state.difficulty} onChange={changeDifficulty} input={<OutlinedInput name="difficulty" labelWidth={difficultyLabelWidth} id="outlined-difficulty-native-simple" />}>
-        {gameDifficulty.map((gd, i) => (<option key={i} value={i} selected={i === state.difficulty}>
+      <Select native value={state.difficulty} onChange={changeDifficulty} input={<OutlinedInput name="difficulty" labelWidth={difficultyLabelWidth} data-testid="select-difficulty" id="select-difficulty" />}>
+        {gameDifficulty.map((gd, i) => (<option key={i} value={i} >
           {gd.label}
         </option>))}
       </Select>
     </FormControl>
 
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel ref={roundsLabel} htmlFor="outlined-rounds-native-simple">
+      <InputLabel ref={roundsLabel} htmlFor="select-rounds">
         Rounds
         </InputLabel>
-      <Select native value={state.rounds} onChange={changeRounds} input={<OutlinedInput name="rounds" labelWidth={roundsLabelWidth} id="outlined-rounds-native-simple" />}>
+      <Select native value={state.rounds} onChange={changeRounds} input={<OutlinedInput name="rounds" labelWidth={roundsLabelWidth} data-testid="select-rounds" id="select-rounds" />}>
         {getRoundsOptionList(state.rounds)}
       </Select>
     </FormControl>
@@ -66,7 +66,7 @@ export const GameSettings = () => {
 const getRoundsOptionList = numRounds => {
   const list = [];
   for (let i = NUM_ROUNDS_MIN; i <= NUM_ROUNDS_MAX; i++) {
-    list.push(<option key={i} value={i} selected={i === numRounds}>
+    list.push(<option key={i} value={i}>
       {i}
     </option>);
   }

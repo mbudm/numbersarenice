@@ -48,7 +48,7 @@ const handlers = {
         ...state.gameData,
         startTime: newStartTime,
       },
-      questions: generateQuestions(state.rounds),
+      questions: generateQuestions(state.rounds, state.difficulty),
       status: newStatus,
     }
   },
@@ -145,10 +145,13 @@ export const initialState: ITimesTableSpeedState = {
   status: START,
 }
 
-const generateQuestions = rounds =>
-  Array.from({ length: rounds }).map(() => ({
+export const generateQuestions = (rounds, difficulty) => {
+  const difficultyData =  gameDifficulty[difficulty]
+
+  return Array.from({ length: rounds }).map(() => ({
     // tslint:disable-next-line:insecure-random
-    a: Math.ceil(Math.random() * 12),
+    a: difficultyData.a[Math.floor(Math.random() * difficultyData.a.length)],
     // tslint:disable-next-line:insecure-random
-    b: Math.ceil(Math.random() * 12),
+    b: difficultyData.b[Math.ceil(Math.random() * difficultyData.b.length)],
   }))
+}

@@ -20,17 +20,20 @@ const validEditRow = (row: number, rows: ILeaderboardEntry[]) => Number.isIntege
 
 export const LeaderboardTable = (props) => (
   <>
-    <Default>
+    <p>should see a table {props.values.width}</p>
+    <Default values={props.values}>
+      <p>should see table default</p>
       <TableSpacious {...props} />
     </Default>
-    <Mobile>
+    <Mobile values={props.values}>
+      <p>should see table mobile</p>
       <TableCondensed {...props} />
     </Mobile>
   </>
 )
 
 
-export const TableSpacious = ({ onRowEdit, rows, gameRow, page, classes }) => {
+export const TableSpacious = ({ onRowEdit, rows, gameRow, page }) => {
   const [editToggle, setEditToggle] = React.useState(validEditRow(gameRow, rows));
   const onEditRow = name => {
     setEditToggle(false);

@@ -49,7 +49,7 @@ export const CompleteScreen = () => {
     GameContext
   )
 
-  const classes = useStyles()
+  const classes = useStyles({})
 
   const resetGame = () => dispatch({type: actions.RESET_GAME})
 

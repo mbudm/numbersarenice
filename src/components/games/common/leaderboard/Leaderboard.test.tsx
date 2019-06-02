@@ -1,5 +1,6 @@
 
 import "jest-dom/extend-expect"
+
 import * as React from "react"
 import {
   fireEvent,
@@ -11,19 +12,20 @@ import {
 import { getLeaderboardData, ILeaderboardEntry, updateLeaderboard } from "./getLeaderboardData"
 import { Leaderboard, LEADERBOARD_DISPLAY_LENGTH } from "./Leaderboard"
 
+const testWidth = 1200
 const STORAGE_KEY = "my-xyz-game"
 const secondsToMs = secs => secs * 1000
 
 describe("Leaderboard", () => {
   it("No leaderboard is displayed, as no local data exists", () => {
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>)
     expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(
       HTMLElement
     )
   })
 
   it("No leaderboard reset link is displayed, as no leaderboard exists", () => {
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>)
     expect(
       queryByTestId(container, "reset-leaderboard-anchor")
     ).not.toBeInstanceOf(HTMLElement)
@@ -42,7 +44,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth}/>
     )
 
     // assert
@@ -75,7 +77,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -95,7 +97,7 @@ describe("Leaderboard", () => {
   })
 
   it("on load has 1 entry from localstorage and is reset-able", () => {
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth} />)
     expect(queryByTestId(container, "leaderboard")).toBeInstanceOf(HTMLElement)
     expect(queryByTestId(container, "reset-leaderboard-anchor")).toBeInstanceOf(
       HTMLElement
@@ -115,7 +117,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -145,7 +147,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -182,7 +184,7 @@ describe("Leaderboard", () => {
     const leaderboardData = getLeaderboardData(STORAGE_KEY)
     updateLeaderboard([...leaderboardData, ...newGames], STORAGE_KEY)
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} />
+      <Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>
     )
 
     // assert
@@ -207,7 +209,7 @@ describe("Leaderboard", () => {
 
       // act
       const { container } = render(
-        <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+        <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
       )
       const editRow = getByTestId(container, "edit-row")
       const editName = getByTestId(editRow, "edit-name-input")
@@ -240,7 +242,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -272,7 +274,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -304,7 +306,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -336,7 +338,7 @@ describe("Leaderboard", () => {
 
     // act
     const { container } = render(
-      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} />
+      <Leaderboard storageKey={STORAGE_KEY} newGame={newGame} width={testWidth} />
     )
     const editRow = getByTestId(container, "edit-row")
     const editName = getByTestId(editRow, "edit-name-input")
@@ -359,7 +361,7 @@ describe("Leaderboard", () => {
     // arrange
 
     // act
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>)
     const resetButton = getByTestId(container, "reset-leaderboard-anchor")
     fireEvent.click(resetButton)
 
@@ -372,14 +374,14 @@ describe("Leaderboard", () => {
   })
 
   it("After reset, hides  table", () => {
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>)
     expect(queryByTestId(container, "leaderboard")).not.toBeInstanceOf(
       HTMLElement
     )
   })
 
   it("After reset, No leaderboard reset link is displayed, as no leaderboard exists", () => {
-    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} />)
+    const { container } = render(<Leaderboard storageKey={STORAGE_KEY} width={testWidth}/>)
     expect(
       queryByTestId(container, "reset-leaderboard-anchor")
     ).not.toBeInstanceOf(HTMLElement)

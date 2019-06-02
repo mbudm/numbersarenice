@@ -35,6 +35,7 @@ const useStyles = makeStyles(() => ({
 interface ILeaderboardProps {
   newGame?: ILeaderboardEntry
   storageKey: string
+  width?: number // allows tests to specifiy a value for media query
 }
 
 const updateGame = (rows: ILeaderboardEntry[], newGame: ILeaderboardEntry) => {
@@ -95,9 +96,9 @@ const usePage = (rows: ILeaderboardEntry[], editRow?: number) => {
   return { page, setPage }
 }
 
-export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
+export const Leaderboard = ({ storageKey, newGame, width }: ILeaderboardProps) => {
 
-  const classes = useStyles()
+  const classes = useStyles({})
 
   const [ saveRows, setSaveRows] = React.useState(false)
   const { rows, setRows } = useLeaderboardData(storageKey, newGame, saveRows, setSaveRows)
@@ -117,6 +118,8 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
     setRows(updateGame(rows, editedGame))
   }
 
+  const values = { width }
+
   return rows.length > 0 ? (
     <Box className={classes.root}>
       <Toolbar className={classes.toolBar}>
@@ -129,7 +132,7 @@ export const Leaderboard = ({ storageKey, newGame }: ILeaderboardProps) => {
           <DeleteForever />
         </IconButton>
       </Toolbar>
-      <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page}/>
+      <LeaderboardTable onRowEdit={onRowEdit} rows={rows} gameRow={gameRow} page={page} values={values}/>
     </Box>
   ): null
 }
