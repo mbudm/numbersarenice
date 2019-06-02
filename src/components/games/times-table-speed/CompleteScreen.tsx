@@ -138,7 +138,7 @@ const GameDetails = () => {
 
 
 const Feedback = {
-  Bad: () => (<p>Not the best score ever. Maybe one of  on your wall might help you practice?</p>),
+  Bad: () => (<p>Not the best score ever. Maybe one of <Link to="/" >our posters</Link> on your wall might help you practice?</p>),
   Great: () => (<p>Math genius alert! Well done.</p>),
   Ok: () => (<p>Good work, but do you think you can beat your score? Why not have another go?</p>),
 }
