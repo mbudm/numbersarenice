@@ -6,13 +6,14 @@ export const GameHeader = () => {
   const { state } = React.useContext(GameContext);
   return (<>
     <h1 style={{
+      color:"#999997",
       marginBottom: 30,
-      marginLeft: 30,
+      marginLeft: 50,
       marginRight: 30,
-      marginTop: 0,
+      marginTop: 10,
       textAlign: "center",
     }}>
-      Speed Tables
+      <em>Speed Tables</em>
     </h1>
   </>);
 };
