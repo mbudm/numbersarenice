@@ -44,8 +44,8 @@ export const GameSettings = () => {
     <FormControl variant="outlined" className={classes.formControl}>
       <InputLabel ref={difficultyLabel} htmlFor="select-difficulty">
         Difficulty
-        </InputLabel>
-      <Select native value={state.difficulty} onChange={changeDifficulty} input={<OutlinedInput name="difficulty" labelWidth={difficultyLabelWidth} data-testid="select-difficulty" id="select-difficulty" />}>
+      </InputLabel>
+      <Select native value={state.difficulty} onChange={changeDifficulty} input={<OutlinedInput name="difficulty" labelWidth={difficultyLabelWidth} id="select-difficulty" data-testid="select-difficulty" />}>
         {gameDifficulty.map((gd, i) => (<option key={i} value={i} >
           {gd.label}
         </option>))}
@@ -56,7 +56,7 @@ export const GameSettings = () => {
       <InputLabel ref={roundsLabel} htmlFor="select-rounds">
         Rounds
         </InputLabel>
-      <Select native value={state.rounds} onChange={changeRounds} input={<OutlinedInput name="rounds" labelWidth={roundsLabelWidth} data-testid="select-rounds" id="select-rounds" />}>
+      <Select native value={state.rounds} onChange={changeRounds} input={<OutlinedInput name="rounds" labelWidth={roundsLabelWidth} id="select-rounds" data-testid="select-rounds" />}>
         {getRoundsOptionList(state.rounds)}
       </Select>
     </FormControl>

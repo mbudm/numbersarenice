@@ -6,6 +6,7 @@ import {
   getByTestId,
   queryByTestId,
   render,
+  getByLabelText,
 } from "react-testing-library"
 import { gameDifficulty, NUM_ROUNDS_INIT } from "./constants"
 import { Game } from "./Game"
@@ -151,42 +152,42 @@ describe("Complete Screen - first game", () => {
   })
 })
 
-// describe("Game Settings", () => {
-//   it("generates a game with the selected rounds and difficulty", () => {
-//     const rounds = 5
-//     const difficulty = 1
-//     const { container } = render(<Game />)
-//     const selectDifficulty = getByTestId(container, "select-difficulty")
-//     const selectRounds = getByTestId(container, "select-rounds")
-//     fireEvent.change(selectDifficulty, { target: { value: difficulty } })
-//     fireEvent.change(selectRounds, { target: { value: rounds } })
+describe("Game Settings", () => {
+  it("generates a game with the selected rounds and difficulty", () => {
+    const rounds = 5
+    const difficulty = 1
+    const { container } = render(<Game />)
+    const selectDifficulty = getByLabelText(container, "Difficulty", { selector: "select" })
+    const selectRounds = getByLabelText(container, "Rounds", { selector: "select" })
+    fireEvent.change(selectDifficulty, { target: { value: difficulty } })
+    fireEvent.change(selectRounds, { target: { value: rounds } })
 
-//     // answer all, collecting the question arguments
-//     const questions = []
-//     startGame(container)
-//     for (let i = 0; i < rounds; i++) {
-//       const a = parseInt(getByTestId(container, "question-a").textContent, 10)
-//       const b = parseInt(getByTestId(container, "question-b").textContent, 10)
-//       questions.push({ a, b })
-//       const answerInput = getByTestId(container, "answer")
-//       const answerSubmit = getByTestId(container, "answer-submit")
-//       fireEvent.change(answerInput, { target: { value: (a * b) } })
-//       fireEvent.click(answerSubmit)
-//     }
+    // answer all, collecting the question arguments
+    const questions = []
+    startGame(container)
+    for (let i = 0; i < rounds; i++) {
+      const a = parseInt(getByTestId(container, "question-a").textContent, 10)
+      const b = parseInt(getByTestId(container, "question-b").textContent, 10)
+      questions.push({ a, b })
+      const answerInput = getByTestId(container, "answer")
+      const answerSubmit = getByTestId(container, "answer-submit")
+      fireEvent.change(answerInput, { target: { value: (a * b) } })
+      fireEvent.click(answerSubmit)
+    }
 
-//     // all questions should match selected difficulty/rounds
-//     expect(queryByTestId(container, "play-screen")).not.toBeInstanceOf(
-//       HTMLElement
-//     )
-//     expect(queryByTestId(container, "complete-screen")).toBeInstanceOf(
-//       HTMLElement
-//     )
-//     expect(questions.length).toBe(rounds)
-//     questions.forEach(q => {
-//       expect(gameDifficulty[difficulty].a).toContain(q.a)
-//       expect(gameDifficulty[difficulty].b).toContain(q.b)
-//     })
-//     const score = getByTestId(container, "game-score")
-//     expect(score).toHaveTextContent("100")
-//   })
-// })
+    // all questions should match selected difficulty/rounds
+    expect(queryByTestId(container, "play-screen")).not.toBeInstanceOf(
+      HTMLElement
+    )
+    expect(queryByTestId(container, "complete-screen")).toBeInstanceOf(
+      HTMLElement
+    )
+    expect(questions.length).toBe(rounds)
+    questions.forEach(q => {
+      expect(gameDifficulty[difficulty].a).toContain(q.a)
+      expect(gameDifficulty[difficulty].b).toContain(q.b)
+    })
+    const score = getByTestId(container, "game-score")
+    expect(score).toHaveTextContent("100")
+  })
+})
