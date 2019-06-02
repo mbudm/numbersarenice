@@ -3,10 +3,10 @@ import "jest-dom/extend-expect"
 import * as React from "react"
 import {
   fireEvent,
+  getByLabelText,
   getByTestId,
   queryByTestId,
   render,
-  getByLabelText,
 } from "react-testing-library"
 import { gameDifficulty, NUM_ROUNDS_INIT } from "./constants"
 import { Game } from "./Game"

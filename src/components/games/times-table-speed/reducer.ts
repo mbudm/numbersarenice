@@ -152,6 +152,6 @@ export const generateQuestions = (rounds, difficulty) => {
     // tslint:disable-next-line:insecure-random
     a: difficultyData.a[Math.floor(Math.random() * difficultyData.a.length)],
     // tslint:disable-next-line:insecure-random
-    b: difficultyData.b[Math.ceil(Math.random() * difficultyData.b.length)],
+    b: difficultyData.b[Math.floor(Math.random() * difficultyData.b.length)],
   }))
 }

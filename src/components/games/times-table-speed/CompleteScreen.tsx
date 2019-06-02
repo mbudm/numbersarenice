@@ -13,6 +13,8 @@ import { actions } from "./reducer";
 const useStyles = makeStyles(() => ({
   feedback: {
     background: "none",
+    fontSize: 24,
+    textAlign: "center",
   },
   reset: {
     marginBottom: "1em"
@@ -30,6 +32,7 @@ const useStyles = makeStyles(() => ({
   },
   statLabel: {
     lineHeight:3,
+    padding:"0 0.2em"
   },
   summary: {
     alignContent: "space-between",
