@@ -5,7 +5,7 @@ module.exports = {
       name: "Numbers are nice",
       image: "/img/logo.svg",
       biography:
-        "Clear, easy to follow math posters. We're startng with multiplication tables, but we hope to add more math posters soon.",
+        "Clear, easy to follow math posters.",
     },
     // for a list of supported networks take a look at https://jaketrent.github.io/react-social-icons/
     networks: [],
@@ -16,7 +16,7 @@ module.exports = {
     with math posters that are clear and easy to follow.</p>
     <p>Our products are well designed using a neat alignment and judicious typography
     with key information in big type
-    so that the important things are retained more easily</p>
+    so that the important things are retained more easily.</p>
     <p>Any questions or feedback? Contact us through our
     <a href="https://www.redbubble.com/people/numbersarenice" >RedBubble profile page</a></p>
     `,

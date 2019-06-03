@@ -11,6 +11,12 @@ import { actions } from "./reducer";
 
 
 const useStyles = makeStyles(() => ({
+  details: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: "center",
+    marginBottom:20
+  },
   feedback: {
     background: "none",
     fontSize: 24,
@@ -41,7 +47,7 @@ const useStyles = makeStyles(() => ({
     flexWrap: 'wrap',
     justifyContent: "center",
     marginBottom: "10px",
-  }
+  },
 }))
 
 export const CompleteScreen = () => {
@@ -91,7 +97,12 @@ export const CompleteScreen = () => {
           </span>
           <span className={classes.statLabel}>%</span>
         </span>
-      </div><Button
+      </div>
+      <div className={classes.details}>
+        <Button onClick={handleDetails} data-testid="game-summary-toggle" >{showDetails ? "Hide" : "View" } game details</Button>
+        {showDetails && <GameDetails />}
+      </div>
+      <Button
         onClick={resetGame}
         data-testid="reset-button"
         variant="contained"
@@ -103,8 +114,6 @@ export const CompleteScreen = () => {
       <div className={classes.feedback}>
         {feedback}
       </div>
-      <Button onClick={handleDetails} data-testid="game-summary-toggle" >{showDetails ? "Hide" : "View" } game details</Button>
-      {showDetails && <GameDetails />}
       <Leaderboard storageKey={GAME_KEY} newGame={state.gameData}/>
     </div>
   )

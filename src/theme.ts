@@ -1,18 +1,18 @@
 const THEME = {
   aboutPage: {
     layout: {
-      backgroundColor: "#eeeedd",
+      backgroundColor: "#f2f2f2",
       cardMaxWidth: 800,
     },
   },
   author: {
     desc: {
-      color: "white",
-      fontSize: 20,
+      color: "#000",
+      fontSize: 32,
       maxWidth: 500,
     },
     logo: {
-      width: "60%",
+      width: "70%",
     },
     title: {
       color: "white",
@@ -27,7 +27,7 @@ const THEME = {
   },
   blogPost: {
     layout: {
-      backgroundColor: "#eeeedd",
+      backgroundColor: "#f2f2f2",
       cardMaxWidth: 1000,
     },
     showMoreButton: {
@@ -48,26 +48,26 @@ const THEME = {
     width: 25,
   },
   fabButton: {
-    backgroundColor: "white",
-    color: "#059ce2",
+    backgroundColor: "#f2f2f2",
+    color: "#000",
   },
   index: {
     aboutButton: {
       backgroundColor: "none",
-      borderColor: "white",
-      color: "white",
+      borderColor: "#999",
+      color: "#000",
       width: 100,
     },
     header: {
-      background: "url(/img/montage.svg) no-repeat center bottom / cover, linear-gradient(20deg, #726030, #b5a067)",
+      background: "none"
     },
     layout: {
-      backgroundColor: "#eeeedd",
+      backgroundColor: "#fff",
       cardSectionMaxWidth: 800,
     },
   },
   leaderBoard: {
-    backgroundColor: "#eee",
+    backgroundColor: "#f2f2f2",
   }
 }
 

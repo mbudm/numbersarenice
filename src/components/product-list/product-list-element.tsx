@@ -33,7 +33,7 @@ export default ({ data }: IProductListElement) => (
           {data.coverFluid ? <Image fluid={data.coverFluid} /> : null}
         </Link>
         <CardContent>
-          <Typography component="p">{data.title}</Typography>
+          <Typography component="p" style={{minHeight:"3em"}}>{data.title}</Typography>
         </CardContent>
       </CardActionArea>
       <BuyButton price={data.price} url={data.url} style={{top: 10, right:10}}/>

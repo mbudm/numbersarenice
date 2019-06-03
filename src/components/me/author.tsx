@@ -3,6 +3,12 @@ import { Link, withPrefix } from "gatsby"
 import * as React from "react"
 import THEME from "../../theme"
 
+import Responsive from "react-responsive"
+
+const Mobile = props => <Responsive {...props} maxWidth={767} />
+const Default = props => <Responsive {...props} minWidth={768} />
+
+
 interface IProps {
   author: {
     name: string
@@ -11,7 +17,26 @@ interface IProps {
   }
 }
 
-export default ({ author }: IProps) => {
+export default ({ author }: IProps) => (
+  <>
+    <Default>
+      <Author author={author} styles={{
+        p: {
+          fontSize:32
+        }
+      }}/>
+    </Default>
+    <Mobile>
+      <Author author={author} styles={{
+        p: {
+          fontSize: 24
+        }
+      }}/>
+    </Mobile>
+  </>
+)
+
+const Author = ({ author, styles}) => {
   return (
     <Grid
       container={true}
@@ -24,6 +49,7 @@ export default ({ author }: IProps) => {
           style={{
             alignItems: "baseline",
             height: "auto",
+            marginBottom: "1rem",
             width: "100%",
           }}
           src={withPrefix(author.image)}
@@ -33,11 +59,11 @@ export default ({ author }: IProps) => {
       <p
         style={{
           color: THEME.author.desc.color,
-          fontSize: THEME.author.desc.fontSize,
           margin: "auto",
-          marginBottom: 20,
+          marginBottom: "1rem",
           maxWidth: THEME.author.desc.maxWidth,
           textAlign: "center",
+          ...styles.p
         }}
       >
         {author.biography}
@@ -45,3 +71,5 @@ export default ({ author }: IProps) => {
     </Grid>
   )
 }
+
+

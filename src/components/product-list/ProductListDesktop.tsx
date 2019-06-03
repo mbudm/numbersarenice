@@ -33,7 +33,7 @@ export class ProductListDesktop extends React.Component<IProps, {}> {
     window.removeEventListener(`scroll`, this.handleScroll);
   }
   public render() {
-    return (<Grid container={true} spacing={24}>
+    return (<Grid container={true} spacing={2}>
       {this.props.products.slice(0, productStore.productsToShow).map(node => (<Grid item={true} xs={12} sm={6} md={4} lg={3} xl={2} key={node.id}>
         <ProductListElement data={{
           coverFluid: node.frontmatter.cover &&

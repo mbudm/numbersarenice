@@ -112,7 +112,7 @@ export default ({ children }) => (
         <Default>
           <IndexLayout
             data={data}
-            styles={{ paddingTop: 30, paddingBottom: 30 }}
+            styles={{ paddingTop: 20, paddingBottom: 20 }}
           >
             {children}
           </IndexLayout>
@@ -120,7 +120,7 @@ export default ({ children }) => (
         <Mobile>
           <IndexLayout
             data={data}
-            styles={{ paddingTop: 20, paddingBottom: 20 }}
+            styles={{ paddingTop: 10, paddingBottom: 10 }}
           >
             {children}
           </IndexLayout>
