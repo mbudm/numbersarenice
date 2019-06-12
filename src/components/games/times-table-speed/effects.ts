@@ -12,6 +12,13 @@ export const effects = (state: ITimesTableSpeedState, props) => {
 
 const handleEffects = (currentState: ITimesTableSpeedState, previousState, props) => {
   if(currentState.status !== previousState.status){
-     ReactGA.pageview(`${props.location.pathname}${currentState.status.toLowerCase()}`)
+    const pageViewPath = createPageView(props.location.pathname, currentState.status)
+    ReactGA.pageview(pageViewPath)
   }
+}
+
+const createPageView = (pathname, status) => {
+ return pathname.endsWith('/') ?
+  `${pathname}${status.toLowerCase()}` :
+  `${pathname}/${status.toLowerCase()}`
 }
