@@ -4,6 +4,7 @@ import * as React from "react";
 import { CardContent } from "@material-ui/core";
 import { CompleteScreen } from "./CompleteScreen";
 import { COMPLETE, PLAY, START } from "./constants";
+import { effects } from "./effects"
 import { GameHeader } from "./GameHeader";
 import { PlayScreen } from "./PlayScreen";
 import { initialState, reducer } from "./reducer";
@@ -17,8 +18,9 @@ const gameScreens = {
   [COMPLETE]: (<CompleteScreen />)
 };
 
-export const Game = () => {
+export const Game = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  effects(state, props)
 
   return (
     <GameContext.Provider value={{

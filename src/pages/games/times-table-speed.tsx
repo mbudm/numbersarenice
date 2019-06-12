@@ -13,7 +13,7 @@ const HeaderArea = () => {
   return <FabButton onClickHandler={goBack} />
 }
 
-export default () => {
+export default (props) => {
   return (
     <>
       <Default>
@@ -34,13 +34,13 @@ export default () => {
             }}
           >
             <HeaderArea />
-            <Game />
+            <Game location={props.location}/>
           </div>
         </div>
       </Default>
       <Mobile>
         <HeaderArea />
-        <Game />
+        <Game location={props.location}/>
       </Mobile>
     </>
   )
