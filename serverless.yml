@@ -72,7 +72,7 @@ resources:
               CustomOriginConfig:
                 HTTPPort: 80
                 HTTPSPort: 443
-                OriginProtocolPolicy: https-only
+                OriginProtocolPolicy: http-only
           Enabled: 'true'
           DefaultRootObject: index.html
           CustomErrorResponses:
