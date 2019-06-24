@@ -67,7 +67,7 @@ resources:
           Aliases:
             - ${self:provider.environment.CUSTOM_DOMAIN}
           Origins:
-            - DomainName: ${self:provider.environment.BUCKET_NAME}.s3.amazonaws.com
+            - DomainName: ${self:provider.environment.BUCKET_NAME}.s3-website-us-east-1.amazonaws.com
               Id: NumberAreNice
               CustomOriginConfig:
                 HTTPPort: 80
