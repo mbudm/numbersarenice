@@ -14,7 +14,8 @@
     "test": "jest",
     "watch": "jest --watch",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-    "test:debugwatch": "node --inspect node_modules/.bin/jest --watch --runInBand"
+    "test:debugwatch": "node --inspect node_modules/.bin/jest --watch --runInBand",
+    "deploy": "npm run build && sls deploy"
   },
   "dependencies": {
     "@babel/core": "^7.4.5",
